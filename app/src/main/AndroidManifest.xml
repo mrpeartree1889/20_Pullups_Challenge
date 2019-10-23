@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_twenty_pushups_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".CreatePlan"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,7 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.a20pullupschallenge.IntroActivity"
+        <activity
+            android:name=".IntroActivity"
             android:label="@string/app_intro" />
     </application>
 

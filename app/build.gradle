@@ -35,4 +35,5 @@ dependencies {
 
     implementation "org.jetbrains.anko:anko:0.10.8"
     implementation 'com.github.AppIntro:AppIntro:5.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }

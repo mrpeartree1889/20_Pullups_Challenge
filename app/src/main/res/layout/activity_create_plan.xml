@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    tools:context=".CreatePlan">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topBar"
@@ -61,6 +60,7 @@
             android:id="@+id/imageView5"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_marginTop="32dp"
             android:adjustViewBounds="false"
             android:background="@drawable/circle_blue"
             android:cropToPadding="false"
@@ -69,63 +69,63 @@
             android:paddingEnd="20dp"
             android:paddingBottom="20dp"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/textView8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
             app:srcCompat="@drawable/initial_training_plan_white" />
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
             android:text="Create your personalized workout"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:textAllCaps="false"
             android:textColor="@color/colorTextPrimary"
-            android:textSize="30sp"
+            android:textSize="18sp"
             android:textStyle="bold|italic"
-            app:layout_constraintBottom_toTopOf="@+id/btnMakePlan"
-            app:layout_constraintEnd_toEndOf="@+id/btnMakePlan"
-            app:layout_constraintStart_toStartOf="@+id/btnMakePlan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
         <Button
-            android:id="@+id/btnMakePlan"
+            android:id="@+id/btnCreatePlan"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:text="LETS GO"
+            android:layout_marginBottom="16dp"
+            android:text="Create plan"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="How many pullups can you do in a row now? (it's okay if you can't do any)"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <NumberPicker
+            android:id="@+id/createPlanNumberPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/textView5"
+            app:layout_constraintEnd_toEndOf="@id/textView5"
+            app:layout_constraintTop_toBottomOf="@id/textView5"
+            app:layout_constraintBottom_toTopOf="@id/btnCreatePlan"
+            />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/workoutPlanLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/createWorkoutLayout">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
