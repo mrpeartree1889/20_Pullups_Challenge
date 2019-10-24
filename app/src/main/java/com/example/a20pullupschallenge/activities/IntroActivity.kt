@@ -1,9 +1,9 @@
-package com.example.a20pullupschallenge
+package com.example.a20pullupschallenge.activities
 
 import android.os.Bundle
-import android.widget.NumberPicker
+import com.example.a20pullupschallenge.R
+import com.example.a20pullupschallenge.SampleSlide
 import com.github.paolorotolo.appintro.AppIntro
-import kotlinx.android.synthetic.main.slide_two.*
 
 class IntroActivity : AppIntro() {
 

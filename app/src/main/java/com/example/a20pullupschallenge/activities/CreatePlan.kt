@@ -1,11 +1,17 @@
-package com.example.a20pullupschallenge
+package com.example.a20pullupschallenge.activities
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.a20pullupschallenge.R
+import com.example.a20pullupschallenge.databases.MyDatabaseOpenHelper
 import kotlinx.android.synthetic.main.activity_create_plan.*
 import org.jetbrains.anko.startActivity
 
 class CreatePlan : AppCompatActivity() {
+
+    val Context.database: MyDatabaseOpenHelper
+        get() = MyDatabaseOpenHelper.getInstance(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +28,7 @@ class CreatePlan : AppCompatActivity() {
         }
 
         btnCreatePlan.setOnClickListener() {
+            database.populatePlan(numberPicked)
             startActivity<MainActivity>("initialPullups" to numberPicked)
         }
     }
