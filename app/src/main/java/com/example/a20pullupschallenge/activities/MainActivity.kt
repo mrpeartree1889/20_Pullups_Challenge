@@ -5,24 +5,28 @@ import android.os.Bundle
 import android.content.Intent
 import android.content.Context
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.a20pullupschallenge.R
+import com.example.a20pullupschallenge.adapters.PlanAdapter
 import com.example.a20pullupschallenge.databases.MyDatabaseOpenHelper
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import org.jetbrains.anko.yesButton
+import org.jetbrains.annotations.TestOnly
 
 const val PREFS_FILENAME = "com.example.a20pullupschallenge.prefs"
 
 class MainActivity : AppCompatActivity() {
 
-    val Context.database: MyDatabaseOpenHelper
+    val Context.planDatabase: MyDatabaseOpenHelper
         get() = MyDatabaseOpenHelper.getInstance(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
 
         // Sets up initial screen slider
         val sp = getSharedPreferences(PREFS_FILENAME, Context.MODE_PRIVATE)
@@ -35,23 +39,77 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Checks if new workout is needed
-        val initialPullups = intent.getIntExtra("initialPullups", -1)
-
-        if(initialPullups == -1) {
+        if(!planDatabase.checkTable()) {
             createWorkoutLayout.visibility = View.VISIBLE
             workoutPlanLayout.visibility = View.GONE
-        } else if (initialPullups >= 0) {
+            btnMakePlan.setOnClickListener() {
+                startActivity<CreatePlan>()
+            }
+        } else if (planDatabase.checkTable()) {
             createWorkoutLayout.visibility = View.GONE
             workoutPlanLayout.visibility = View.VISIBLE
 
-            val plan = database.getPlan()
-            val planId = plan[0].planId
-
-            toast("number of initial pullups was $initialPullups and planId is $planId")
+            viewPlan()
         }
 
-        btnMakePlan.setOnClickListener() {
-            startActivity<CreatePlan>()
+    }
+
+    fun optionsBtnClicked(view: View) {
+        fun focusOnBtns() {
+            createNewPlanBtn.visibility = View.VISIBLE
+            disclaimerBtn.visibility = View.VISIBLE
+            titleText.alpha = 0.25f
+            tableRow.alpha = 0.25f
+            rvList.alpha = 0.25f
+            startWorkoutBtn.isEnabled = false
+            startWorkoutBtn.isClickable = false
         }
+
+        fun focusOnBckg() {
+            createNewPlanBtn.visibility = View.GONE
+            disclaimerBtn.visibility = View.GONE
+            titleText.alpha = 1f
+            tableRow.alpha = 1f
+            rvList.alpha = 1f
+            startWorkoutBtn.isEnabled = true
+            startWorkoutBtn.isClickable = true
+        }
+
+        if (createNewPlanBtn.visibility != View.VISIBLE) {
+            focusOnBtns()
+            overallLayout.setOnClickListener() {focusOnBckg() }
+            rvList.setOnClickListener() {focusOnBckg()}
+        } else if (createNewPlanBtn.visibility == View.VISIBLE) {
+            focusOnBckg()
+        }
+
+
+    }
+
+    fun createNewPlanBtnClicked (view: View){
+        alert("If you continue, you will delete your current progress. Are you sure you want to proceed?", "Attention") {
+            positiveButton("Yes, proceed") {
+                planDatabase.dropTable()
+                startActivity<CreatePlan>()
+            }
+            negativeButton("No, go back") {}
+        }.show()
+
+    }
+
+    fun disclaimerBtnClicked(view: View) {
+        alert("If you continue, you will delete your current progress. Are you sure you want to proceed?", "Disclaimer") {
+            title = "test"
+            message = "asdiasoidhauhfashdlajsldkj"
+            positiveButton("Ok") {}
+        }.show()
+    }
+
+    private fun viewPlan() {
+        val plan = planDatabase.getPlan()
+        val adapter = PlanAdapter(this, plan, this)
+        val rv : RecyclerView = findViewById(R.id.rvList)
+        rv.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL,false)
+        rv.adapter = adapter
     }
 }

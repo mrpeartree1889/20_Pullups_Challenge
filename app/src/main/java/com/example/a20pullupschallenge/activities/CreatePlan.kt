@@ -10,7 +10,7 @@ import org.jetbrains.anko.startActivity
 
 class CreatePlan : AppCompatActivity() {
 
-    val Context.database: MyDatabaseOpenHelper
+    val Context.planDatabase: MyDatabaseOpenHelper
         get() = MyDatabaseOpenHelper.getInstance(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +28,7 @@ class CreatePlan : AppCompatActivity() {
         }
 
         btnCreatePlan.setOnClickListener() {
-            database.populatePlan(numberPicked)
+            planDatabase.populatePlan(numberPicked)
             startActivity<MainActivity>("initialPullups" to numberPicked)
         }
     }

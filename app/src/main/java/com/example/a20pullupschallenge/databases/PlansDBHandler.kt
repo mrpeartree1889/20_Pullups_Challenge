@@ -22,17 +22,19 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
 
     override fun onCreate(db: SQLiteDatabase) {
         // Here you create tables
-        db.createTable("Plan", true,
-            "planId" to TEXT,
-            "startDate" to TEXT,
-            "week" to INTEGER,
-            "day" to INTEGER,
-            "status" to TEXT,
-            "setOne" to INTEGER,
-            "setTwo" to INTEGER,
-            "setThree" to INTEGER,
-            "setFour" to INTEGER,
-            "setFive" to INTEGER)
+//        db.createTable("Plan", true,
+//            "planId" to TEXT,
+//            "startDate" to TEXT,
+//            "week" to INTEGER,
+//            "day" to INTEGER,
+//            "status" to TEXT,
+//            "setOne" to INTEGER,
+//            "setTwo" to INTEGER,
+//            "setThree" to INTEGER,
+//            "setFour" to INTEGER,
+//            "setFive" to INTEGER)
+
+        createTable(db)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -75,12 +77,16 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
             numInitialPullups < 3 -> { // beginners plan
                 dayWorkout.planId = "beg_${numInitialPullups}_${currentDate}"
                 dayWorkout.startDate = currentDate
-                dayWorkout.totNumWeeks = 8
+
+                /// TEMPORARY NUMBER DONT FORGET TO CHANGE////////////////////////////////////////////////////////////
+                dayWorkout.totNumWeeks = 2
+                //////////////////////////////////////////////////////////////////////////////////////////
+
                 dayWorkout.status = "plan"
 
 
-                when {
-                    numInitialPullups == 0 -> {
+                when (numInitialPullups) {
+                    0 -> {
                         for (week in 1..dayWorkout.totNumWeeks) {
                             for (day in 1..3) {
                                 dayWorkout.week = week
@@ -88,7 +94,7 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
                                 when {
                                     week == 1 && day == 1-> {dayWorkout.workoutSets = Sets(-1,-1,-1,-1,-1)}
                                     week == 1 && day == 2-> {dayWorkout.workoutSets = Sets(-1,-1,-1,-1,-1)}
-                                    week == 1 && day == 3-> {dayWorkout.workoutSets = Sets(-1,-1,-1,-1,1)}
+                                    week == 1 && day == 3-> {dayWorkout.workoutSets = Sets(-1,-1,-1,-1,1) }
 
                                     week == 2 && day == 1-> {dayWorkout.workoutSets = Sets(1,-1,-1,-1,-1)}
                                     week == 2 && day == 2-> {dayWorkout.workoutSets = Sets(1,-1,1,-1,-1)}
@@ -99,8 +105,7 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
                             }
                         }
                     }
-
-                    numInitialPullups == 1 -> {
+                    1 -> {
                         for (week in 1..dayWorkout.totNumWeeks) {
                             for (day in 1..3) {
                                 dayWorkout.week = week
@@ -119,8 +124,7 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
                             }
                         }
                     }
-
-                    numInitialPullups == 2 -> {
+                    2 -> {
                         for (week in 1..dayWorkout.totNumWeeks) {
                             for (day in 1..3) {
                                 dayWorkout.week = week
@@ -185,6 +189,38 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
         }
         db.close()
         return plan
+    }
+
+    fun dropTable() {
+        val db = this.writableDatabase
+        db.dropTable("Plan", true)
+        createTable(db)
+    }
+
+    fun createTable(db: SQLiteDatabase) {
+        db.createTable("Plan", true,
+            "planId" to TEXT,
+            "startDate" to TEXT,
+            "week" to INTEGER,
+            "day" to INTEGER,
+            "status" to TEXT,
+            "setOne" to INTEGER,
+            "setTwo" to INTEGER,
+            "setThree" to INTEGER,
+            "setFour" to INTEGER,
+            "setFive" to INTEGER)
+    }
+
+    fun checkTable(): Boolean {
+        val db = this.readableDatabase
+        var week = 0
+        db.select("Plan","week").limit(1).exec {
+            while (this.moveToNext()) {
+                week = this.getInt(this.getColumnIndex("week"))
+            }
+        }
+
+        return week > 0
     }
 }
 

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dayWorkoutLo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TableRow
+        android:id="@+id/tableLo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingVertical="4dp"
+        android:weightSum="7">
+
+        <TextView
+            android:id="@+id/weekText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:text="Week x"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextWhite" />
+
+        <TextView
+            android:id="@+id/dayText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Day x"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextPrimary" />
+
+        <TextView
+            android:id="@+id/setOne"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:background="#0D000000"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextPrimary" />
+
+        <TextView
+            android:id="@+id/setTwo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:background="#0D000000"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextPrimary" />
+
+        <TextView
+            android:id="@+id/setThree"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:background="#0D000000"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextPrimary" />
+
+        <TextView
+            android:id="@+id/setFour"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:background="#0D000000"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextPrimary" />
+
+        <TextView
+            android:id="@+id/setFive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:background="#0D000000"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextPrimary" />
+    </TableRow>
+</LinearLayout>
