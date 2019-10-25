@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         fun focusOnBtns() {
             createNewPlanBtn.visibility = View.VISIBLE
             disclaimerBtn.visibility = View.VISIBLE
+            clickLayout.visibility = View.VISIBLE
             titleText.alpha = 0.25f
             tableRow.alpha = 0.25f
             rvList.alpha = 0.25f
@@ -68,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         fun focusOnBckg() {
             createNewPlanBtn.visibility = View.GONE
             disclaimerBtn.visibility = View.GONE
+            clickLayout.visibility = View.GONE
             titleText.alpha = 1f
             tableRow.alpha = 1f
             rvList.alpha = 1f
@@ -77,8 +79,7 @@ class MainActivity : AppCompatActivity() {
 
         if (createNewPlanBtn.visibility != View.VISIBLE) {
             focusOnBtns()
-            overallLayout.setOnClickListener() {focusOnBckg() }
-            rvList.setOnClickListener() {focusOnBckg()}
+            clickLayout.setOnClickListener() {focusOnBckg() }
         } else if (createNewPlanBtn.visibility == View.VISIBLE) {
             focusOnBckg()
         }
@@ -103,6 +104,10 @@ class MainActivity : AppCompatActivity() {
             message = "asdiasoidhauhfashdlajsldkj"
             positiveButton("Ok") {}
         }.show()
+    }
+
+    fun startWorkoutBtnClicked(view:View) {
+        startActivity<WorkoutActivity>()
     }
 
     private fun viewPlan() {
