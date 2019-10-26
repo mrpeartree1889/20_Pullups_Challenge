@@ -214,107 +214,46 @@
             android:textColor="@color/colorTextWhite"
             android:textSize="36sp"
             android:textStyle="bold|italic"
-            app:layout_constraintBottom_toTopOf="@+id/pullupLo"
+            app:layout_constraintBottom_toTopOf="@+id/progressBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/pullupLo"
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:background="@drawable/circle_white"
+            android:indeterminate="false"
+            android:progressDrawable="@drawable/progress_bar_rest"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/pullupNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1"
-                android:textColor="@color/colorPrimary"
-                android:textSize="100sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView34"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:text="pullups"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/achievedLo"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/timeText"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pullupLo"
-            app:layout_constraintVertical_bias="0.491">
+            android:text="120"
+            android:textColor="@color/colorTextWhite"
+            android:textSize="50sp"
+            app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+            app:layout_constraintEnd_toEndOf="@+id/progressBar"
+            app:layout_constraintStart_toStartOf="@+id/progressBar"
+            app:layout_constraintTop_toTopOf="@+id/progressBar" />
 
-            <TextView
-                android:id="@+id/textView35"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Achieved"
-                android:textColor="@color/colorTextWhite"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView36"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="0"
-                android:textColor="@color/colorTextWhite"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView35" />
-
-            <Button
-                android:id="@+id/buttonPlus"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="+"
-                android:textColor="@color/colorTextWhite"
-                android:textSize="30sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView36"
-                app:layout_constraintStart_toEndOf="@+id/textView36"
-                app:layout_constraintTop_toTopOf="@+id/textView36" />
-
-            <Button
-                android:id="@+id/buttonMinus"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="-"
-                android:textColor="@color/colorTextWhite"
-                android:textSize="30sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView36"
-                app:layout_constraintEnd_toStartOf="@+id/textView36"
-                app:layout_constraintTop_toTopOf="@+id/textView36" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="seconds rest"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextWhite"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/progressBar"
+            app:layout_constraintStart_toStartOf="@+id/progressBar"
+            app:layout_constraintTop_toBottomOf="@+id/timeText" />
 
         <TextView
             android:id="@+id/textView37"

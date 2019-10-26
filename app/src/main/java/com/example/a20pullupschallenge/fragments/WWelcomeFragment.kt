@@ -17,9 +17,9 @@ class WWelcomeFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_workout_welcome, container, false)
 
-        startWorkoutBtn.setOnClickListener() {
-
-        }
+//        startWorkoutBtn.setOnClickListener() {
+//
+//        }
 
         // TODO: clean this empty code
 //        val textView = view.findViewById<TextView>(R.id.txtMain)
