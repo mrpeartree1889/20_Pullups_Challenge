@@ -28,14 +28,15 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icon20pc" />
+            app:srcCompat="@drawable/icon20pc"
+            android:contentDescription="@string/app_icon" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="20 PULLUPS CHALLENGE"
+            android:text="@string/app_name_all_caps"
             android:textAlignment="textStart"
             android:textColor="@color/colorTextWhite"
             android:textSize="30sp"
@@ -76,14 +77,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            app:srcCompat="@drawable/initial_training_plan_white" />
+            app:srcCompat="@drawable/initial_training_plan_white"
+            android:contentDescription="@string/bckg_blue" />
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Create your personalized workout"
+            android:text="@string/create_pers_workout"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/colorTextPrimary"
@@ -102,7 +104,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:text="LETS GO"
+            android:text="@string/lets_go_btn"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -126,7 +128,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Your personalized training plan"
+            android:text="@string/your_personalized_training_plan"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="24sp"
@@ -158,10 +160,10 @@
                 android:id="@+id/setOne"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
                 android:layout_weight="1"
                 android:background="@color/colorPrimary"
-                android:text="Set 1"
+                android:text="@string/set_1"
                 android:textAlignment="center"
                 android:textColor="@color/colorTextWhite" />
 
@@ -169,10 +171,10 @@
                 android:id="@+id/setTwo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
                 android:layout_weight="1"
                 android:background="@color/colorPrimary"
-                android:text="Set 2"
+                android:text="@string/set_2"
                 android:textAlignment="center"
                 android:textColor="@color/colorTextWhite" />
 
@@ -180,10 +182,10 @@
                 android:id="@+id/setThree"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
                 android:layout_weight="1"
                 android:background="@color/colorPrimary"
-                android:text="Set 3"
+                android:text="@string/set_3"
                 android:textAlignment="center"
                 android:textColor="@color/colorTextWhite" />
 
@@ -191,10 +193,10 @@
                 android:id="@+id/setFour"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
                 android:layout_weight="1"
                 android:background="@color/colorPrimary"
-                android:text="Set 4"
+                android:text="@string/set_4"
                 android:textAlignment="center"
                 android:textColor="@color/colorTextWhite" />
 
@@ -202,10 +204,10 @@
                 android:id="@+id/setFive"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
                 android:layout_weight="1"
                 android:background="@color/colorPrimary"
-                android:text="Set 5"
+                android:text="@string/set_5"
                 android:textAlignment="center"
                 android:textColor="@color/colorTextWhite" />
         </TableRow>
@@ -244,15 +246,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2.2"
                 android:onClick="startWorkoutBtnClicked"
-                android:text="Start next workout" />
+                android:text="@string/start_next_workout_btn" />
 
             <Button
                 android:id="@+id/optionsBtn"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.8"
                 android:onClick="optionsBtnClicked"
-                android:text="Options" />
+                android:text="@string/options_btn" />
         </LinearLayout>
 
         <FrameLayout
@@ -272,7 +275,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="disclaimerBtnClicked"
-            android:text="Disclaimer"
+            android:text="@string/disclaimer_btn"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/createNewPlanBtn"
             app:layout_constraintEnd_toEndOf="@+id/createNewPlanBtn" />
@@ -283,7 +286,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="createNewPlanBtnClicked"
-            android:text="Create new plan"
+            android:text="@string/create_new_plan"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout2" />

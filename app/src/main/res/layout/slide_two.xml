@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,7 +24,8 @@
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/onboarding_initial_test" />
+            app:srcCompat="@drawable/onboarding_initial_test"
+            android:contentDescription="@string/arm_img" />
     </FrameLayout>
 
     <TextView
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Initial test"
+        android:text="@string/initial_test"
         android:textColor="@color/colorTextWhite"
         android:textSize="60sp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
@@ -47,7 +47,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="In order to setup your training plan, we need to know what is the maximum number of pullups that you can do right now."
+        android:text="@string/initial_test_message"
         android:textColor="@color/colorTextWhite"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
@@ -61,7 +61,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="If you can't do any pullups ,don't worry! The program also covers that."
+        android:text="@string/initial_test_continuation"
         android:textColor="@color/colorTextWhite"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
@@ -75,7 +75,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Lets do this!"
+        android:text="@string/lets_do_this"
         android:textAlignment="center"
         android:textColor="@color/colorTextWhite"
         android:textSize="30sp"

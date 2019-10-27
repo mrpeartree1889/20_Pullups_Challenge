@@ -191,6 +191,46 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
         return plan
     }
 
+    fun getNextWorkoutWeekAndDay() : ArrayList<Int> {
+        val weekAndDay = ArrayList<Int>()
+        val db = this.readableDatabase
+        db.select("Plan", "week", "day", "status").exec {
+            if (this.count != 0) {
+                while (this.moveToNext()) {
+                    if (this.getString(this.getColumnIndex("status")) == "next") {
+                        weekAndDay.add(this.getInt(this.getColumnIndex("week")))
+                        weekAndDay.add(this.getInt(this.getColumnIndex("day")))
+                    }
+                }
+                this.close()
+            }
+        }
+        db.close()
+        return weekAndDay
+    }
+
+    // TODO Finish this method to get the workout of the day
+
+//    fun getNextWorkout() : DayWorkout {
+//        val dayWorkout = DayWorkout()
+//        val db = this.readableDatabase
+//        db.select("Plan", "week", "day", "status", "setOne", "setTwo", "setThree", "setFour", "setFive")
+//            .whereArgs("")
+//            .exec {
+//            if (this.count != 0) {
+//                while (this.moveToNext()) {
+//                    if (this.getString(this.getColumnIndex("status")) == "next") {
+//                        weekAndDay.add(this.getInt(this.getColumnIndex("week")))
+//                        weekAndDay.add(this.getInt(this.getColumnIndex("day")))
+//                    }
+//                }
+//                this.close()
+//            }
+//        }
+//        db.close()
+//        return weekAndDay
+//    }
+
     fun dropTable() {
         val db = this.writableDatabase
         db.dropTable("Plan", true)

@@ -12,6 +12,6 @@ class DayWorkout {
     var totNumWeeks : Int = 0
     var week : Int = 0
     var day : Int = 0
-    var status : String = "" // either plan for PLANNED or accomp for ACCOMPLISHED
+    var status : String = "" // either plan for PLANNED, next for NEXT, comp for COMPLETED or accomp for ACCOMPLISHED
     var workoutSets: Sets = Sets()
 }

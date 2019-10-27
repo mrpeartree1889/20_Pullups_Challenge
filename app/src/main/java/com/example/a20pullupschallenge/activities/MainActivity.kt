@@ -13,9 +13,6 @@ import com.example.a20pullupschallenge.databases.MyDatabaseOpenHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
-import org.jetbrains.anko.yesButton
-import org.jetbrains.annotations.TestOnly
 
 const val PREFS_FILENAME = "com.example.a20pullupschallenge.prefs"
 
@@ -34,8 +31,7 @@ class MainActivity : AppCompatActivity() {
             val editor = sp.edit()
             editor.putBoolean("first", true)
             editor.apply()
-            val intent = Intent(this, IntroActivity::class.java) // Call the AppIntro java class
-            startActivity(intent)
+            startActivity<IntroActivity>()
         }
 
         // Checks if new workout is needed
@@ -51,7 +47,6 @@ class MainActivity : AppCompatActivity() {
 
             viewPlan()
         }
-
     }
 
     fun optionsBtnClicked(view: View) {
@@ -107,7 +102,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startWorkoutBtnClicked(view:View) {
-        startActivity<WorkoutActivity>()
+        val weekAndDay = planDatabase.getNextWorkoutWeekAndDay()
+        val nextWeek = weekAndDay[0]
+        val nextDay = weekAndDay[1]
+        startActivity<WorkoutActivity>("week" to nextWeek, "day" to nextDay)
     }
 
     private fun viewPlan() {

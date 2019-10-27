@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.core.view.updateLayoutParams
 import com.example.a20pullupschallenge.R
 import kotlinx.android.synthetic.main.activity_workout.*
 import org.jetbrains.anko.startActivity
@@ -20,69 +19,77 @@ class WorkoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_workout)
 
+        val weekCurrent = intent.getIntExtra("week",0)
+        val dayCurrent = intent.getIntExtra("day",0)
+
+
+        // Load layouts as scenes
         val sceneRoot: ViewGroup = findViewById(R.id.fragLayout)
-        val welcomeScene: Scene =
-            Scene.getSceneForLayout(sceneRoot, R.layout.fragment_workout_welcome, this)
-        val pullupScene: Scene =
-            Scene.getSceneForLayout(sceneRoot, R.layout.fragment_workout_set, this)
-        val restScene: Scene =
-            Scene.getSceneForLayout(sceneRoot, R.layout.fragment_workout_rest, this)
-        val completeScene: Scene =
-            Scene.getSceneForLayout(sceneRoot, R.layout.fragment_workout_complete, this)
+        val welcomeScene: Scene = Scene.getSceneForLayout(sceneRoot, R.layout.lo_workout_welcome, this)
+        val pullupScene: Scene = Scene.getSceneForLayout(sceneRoot, R.layout.lo_workout_set, this)
+        val restScene: Scene = Scene.getSceneForLayout(sceneRoot, R.layout.lo_workout_rest, this)
+        val completeScene: Scene = Scene.getSceneForLayout(sceneRoot, R.layout.lo_workout_complete, this)
 
         TransitionManager.go(welcomeScene)
-        var activeScene : String = "welcome"
-
-        mainBtn.setOnClickListener() {
-            if (activeScene == "welcome") {
-                TransitionManager.go(pullupScene)
-                mainBtn.text = "Done"
-                activeScene = "pullup"
-            } else if (activeScene == "pullup") {
-                TransitionManager.go(restScene)
-                mainBtn.text = "Complete"
-                activeScene = "rest"
+        // set var with name of active scene
+        var activeScene = "welcome"
 
 
-                /// TIMER
-                val progressBar: ProgressBar = findViewById(R.id.progressBar)
-                val timeText : TextView = findViewById(R.id.timeText)
-                val countDownTimer: CountDownTimer
-                var i = 0
-
-                progressBar.isIndeterminate = false
-                progressBar.progress = (120- i)
-                progressBar.max = 120
-//                progressBar.min = 0
-
-                countDownTimer = object : CountDownTimer(121000, 1000) {
-                    override fun onTick(millisUntilFinished: Long) {
-                        timeText.text = (120 - i).toString()
-                        progressBar.progress = (120 - i)
-                        i++
-
-                    }
-
-                    override fun onFinish() {
-                        TransitionManager.go(completeScene)
-                        cancelBtn.visibility = View.GONE
-                        mainBtn.text = "Great!"
-                        activeScene = "complete"
-                    }
+        // on click for the main button that changes the text displayed in it
+        // and the action depending on the active state
+        mainBtn.setOnClickListener {
+            when (activeScene) {
+                "welcome" -> {
+                    TransitionManager.go(pullupScene)
+                    mainBtn.text = getString(R.string.done)
+                    activeScene = "pullup"
                 }
-                countDownTimer.start()
-            } else if (activeScene == "rest") {
-                TransitionManager.go(completeScene)
-                cancelBtn.visibility = View.GONE
-                mainBtn.text = "Great!"
-                activeScene = "complete"
-            } else if (activeScene == "complete") {
-                startActivity<MainActivity>()
+
+                "pullup" -> {
+                    TransitionManager.go(restScene)
+                    mainBtn.text = getString(R.string.rest_complete)
+                    activeScene = "rest"
+
+
+                    /// Timer for resting
+                    val progressBar: ProgressBar = findViewById(R.id.progressBar)
+                    val timeText : TextView = findViewById(R.id.timeText)
+                    val countDownTimer: CountDownTimer
+                    var i = 0
+
+                    progressBar.isIndeterminate = false
+                    progressBar.progress = (120- i)
+                    progressBar.max = 120
+
+                    countDownTimer = object : CountDownTimer(121000, 1000) {
+                        override fun onTick(millisUntilFinished: Long) {
+                            timeText.text = (120 - i).toString()
+                            progressBar.progress = (120 - i)
+                            i++
+
+                        }
+
+                        override fun onFinish() {
+                            TransitionManager.go(completeScene)
+                            cancelBtn.visibility = View.GONE
+                            mainBtn.text = getString(R.string.workout_complete_great)
+                            activeScene = "complete"
+                        }
+                    }
+                    countDownTimer.start()
+                }
+
+                "rest" -> {
+                    TransitionManager.go(completeScene)
+                    cancelBtn.visibility = View.GONE
+                    mainBtn.text = getString(R.string.workout_complete_great)
+                    activeScene = "complete"
+
+                }
+
+                "complete" -> startActivity<MainActivity>()
             }
         }
-
-
-
     }
 
 

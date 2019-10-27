@@ -26,14 +26,15 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icon20pc" />
+            app:srcCompat="@drawable/icon20pc"
+            android:contentDescription="@string/app_icon" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="20 PULLUPS CHALLENGE"
+            android:text="@string/app_name_all_caps"
             android:textAlignment="textStart"
             android:textColor="@color/colorTextWhite"
             android:textSize="30sp"
@@ -53,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:text="Week x of y"
+        android:text="@string/week_x_of_y_placeholder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topBar" />
 
@@ -63,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:text="Day x of y"
+        android:text="@string/day_x_of_y_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topBar" />
 
@@ -81,9 +82,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weekText">
 
-        <include layout="@layout/fragment_workout_welcome" />
+        <include layout="@layout/lo_workout_welcome" />
 
-        <include layout="@layout/fragment_workout_set" />
+        <include layout="@layout/lo_workout_set" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -104,7 +105,7 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Start workout"
+            android:text="@string/start_workout_btn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/cancelBtn"
             app:layout_constraintStart_toStartOf="parent"
@@ -115,9 +116,9 @@
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:text="Cancel"
+            android:text="@string/cancel_btn"
             android:textColor="@android:color/holo_red_light"
-            android:textSize="10sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/mainBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/mainBtn" />

@@ -26,14 +26,15 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icon20pc" />
+            app:srcCompat="@drawable/icon20pc"
+            android:contentDescription="@string/app_icon" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="20 PULLUPS CHALLENGE"
+            android:text="@string/app_name_all_caps"
             android:textAlignment="textStart"
             android:textColor="@color/colorTextWhite"
             android:textSize="30sp"
@@ -72,7 +73,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/initial_training_plan_white" />
+            app:srcCompat="@drawable/initial_training_plan_white"
+            android:contentDescription="@string/bckg_blue" />
 
         <TextView
             android:id="@+id/textView8"
@@ -81,7 +83,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:text="Create your personalized workout"
+            android:text="@string/create_plan_title"
             android:textAlignment="textStart"
             android:textAllCaps="false"
             android:textColor="@color/colorTextPrimary"
@@ -99,7 +101,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"
-            android:text="Create plan"
+            android:text="@string/create_plan_btn"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +112,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="How many pullups can you do in a row now? (it's okay if you can't do any)"
+            android:text="@string/pullups_question"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/textView8"
             app:layout_constraintStart_toStartOf="@+id/textView8"

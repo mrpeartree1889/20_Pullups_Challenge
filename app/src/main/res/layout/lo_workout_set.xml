@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.SetFragment">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -34,56 +32,56 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="@drawable/left_border_gray"
-                    android:text="Set" />
+                    android:text="@string/set" />
 
                 <TextView
                     android:id="@+id/setOneTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
+                    android:layout_marginStart="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/left_border_gray"
-                    android:text="1"
+                    android:text="@string/one"
                     android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/setTwoTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
+                    android:layout_marginStart="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/left_border_gray"
-                    android:text="2"
+                    android:text="@string/two"
                     android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/setThreeTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
+                    android:layout_marginStart="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/left_border_gray"
-                    android:text="3"
+                    android:text="@string/three"
                     android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/setFourTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
+                    android:layout_marginStart="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/left_border_gray"
-                    android:text="4"
+                    android:text="@string/four"
                     android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/setFiveTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
+                    android:layout_marginStart="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/left_border_gray"
-                    android:text="5"
+                    android:text="@string/five"
                     android:textAlignment="center" />
             </TableRow>
 
@@ -97,14 +95,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="Plan" />
+                    android:text="@string/plan" />
 
                 <TextView
                     android:id="@+id/setOnePlan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="-"
+                    android:text="@string/dash"
                     android:textAlignment="center" />
 
                 <TextView
@@ -112,7 +110,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="-"
+                    android:text="@string/dash"
                     android:textAlignment="center" />
 
                 <TextView
@@ -120,7 +118,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="-"
+                    android:text="@string/dash"
                     android:textAlignment="center" />
 
                 <TextView
@@ -128,7 +126,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="-"
+                    android:text="@string/dash"
                     android:textAlignment="center" />
 
                 <TextView
@@ -136,7 +134,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="-"
+                    android:text="@string/dash"
                     android:textAlignment="center" />
             </TableRow>
 
@@ -150,14 +148,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="Achieved" />
+                    android:text="@string/achieved" />
 
                 <TextView
                     android:id="@+id/setOneAchieved"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="-"
+                    android:text="@string/dash"
                     android:textAlignment="center" />
 
                 <TextView
@@ -165,7 +163,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="-"
+                    android:text="@string/dash"
                     android:textAlignment="center" />
 
                 <TextView
@@ -173,7 +171,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="-"
+                    android:text="@string/dash"
                     android:textAlignment="center" />
 
                 <TextView
@@ -181,7 +179,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="-"
+                    android:text="@string/dash"
                     android:textAlignment="center" />
 
                 <TextView
@@ -189,7 +187,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="-"
+                    android:text="@string/dash"
                     android:textAlignment="center" />
             </TableRow>
 
@@ -210,7 +208,7 @@
             android:id="@+id/setNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Set x"
+            android:text="@string/set_placeholder"
             android:textColor="@color/colorTextWhite"
             android:textSize="36sp"
             android:textStyle="bold|italic"
@@ -233,7 +231,7 @@
                 android:id="@+id/pullupNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
+                android:text="@string/one"
                 android:textColor="@color/colorPrimary"
                 android:textSize="100sp"
                 android:textStyle="bold"
@@ -247,7 +245,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:text="pullups"
+                android:text="@string/pullups"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -270,7 +268,7 @@
                 android:id="@+id/textView35"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Achieved"
+                android:text="@string/achieved"
                 android:textColor="@color/colorTextWhite"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -282,7 +280,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="0"
+                android:text="@string/zero_placeholder"
                 android:textColor="@color/colorTextWhite"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -295,7 +293,7 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="+"
+                android:text="@string/plus"
                 android:textColor="@color/colorTextWhite"
                 android:textSize="30sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView36"
@@ -308,7 +306,7 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="-"
+                android:text="@string/minus"
                 android:textColor="@color/colorTextWhite"
                 android:textSize="30sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView36"
@@ -320,7 +318,7 @@
             android:id="@+id/textView37"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Next: this"
+            android:text="@string/next_placeholder"
             android:textColor="@color/colorTextWhite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

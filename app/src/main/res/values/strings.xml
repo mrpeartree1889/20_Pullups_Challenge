@@ -2,6 +2,95 @@
     <string name="app_name">20 Pullups Challenge</string>
     <string name="app_intro">App intro</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    /// Layout day workout
+    <string name="week_number">Week %1$i</string>
+    <string name="week_number_placeholder">Week x</string>
+    <string name="day_number_placeholder">Day x</string>
+    <string name="day_number">Day %1$i</string>
+    <string name="zero_placeholder">0</string>
+
+    /// Workout activity kt
+    <string name="done">Done</string>
+    <string name="rest_complete">Rest complete</string>
+    <string name="workout_complete_great">Great!</string>
+    /// Workout activity layout
+    <string name="week_x_of_y_placeholder">Week x of y</string>
+    <string name="week_x_of_y">Week %1$i of %2$i</string>
+    <string name="day_x_of_y_placeholder">Day x of y</string>
+    <string name="day_x_of_y">Day %1$i of %2$i</string>
+    <string name="start_workout_btn">Start workout</string>
+    <string name="cancel_btn">Cancel</string>
+
+    /// Activity create plan
+    <string name="app_icon">App icon</string>
+    <string name="app_name_all_caps">20 PULLUPS CHALLENGE</string>
+    <string name="bckg_blue">Bckg blue</string>
+    <string name="create_plan_title">Create your personalized workout</string>
+    <string name="create_plan_btn">Create plan</string>
+    <string name="pullups_question">How many pullups can you do in a row now? (it\'s okay if you can\'t do any)</string>
+
+    /// Main activity
+    <string name="create_pers_workout">Create your personalized workout</string>
+    <string name="lets_go_btn">LETS GO</string>
+    <string name="your_personalized_training_plan">Your personalized training plan</string>
+    <string name="set_1">Set 1</string>
+    <string name="set_2">Set 2</string>
+    <string name="set_3">Set 3</string>
+    <string name="set_4">Set 4</string>
+    <string name="set_5">Set 5</string>
+    <string name="start_next_workout_btn">Start next workout</string>
+    <string name="options_btn">Options</string>
+    <string name="disclaimer_btn">Disclaimer</string>
+    <string name="create_new_plan">Create new plan</string>
+
+    /// Layout workout complete
+    <string name="complete_tick_img">Complete tick img</string>
+    <string name="challenge_completed_today">Challenge\ncompleted\ntoday</string>
+    <string name="pullups_achieved_placeholder">You achieved a total of x pullups</string>
+    <string name="pullups_achieved">You achieved a total of %1$i pullups</string>
+    <string name="good_job">Good job!</string>
+
+    /// Layout workout rest
+    <string name="set">Set</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="plan">Plan</string>
+    <string name="dash">-</string>
+    <string name="achieved">Achieved</string>
+    <string name="set_placeholder">Set x</string>
+    <string name="set_number">Set %1$i</string>
+    <string name="hundredtwenty">120</string>
+    <string name="seconds_rest">seconds rest</string>
+    <string name="next_placeholder">Next: this</string>
+    <string name="next">Next: %1$s</string>
+
+    /// Layout workout set
+    <string name="pullups">pullups</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+
+    /// Layout workout welcome
+    <string name="zero_pullups_placeholder">0 pullups</string>
+    <string name="pullups_plan">%1$i pullups</string>
+    <string name="rest">Rest</string>
+    <string name="rest_time">120 sec.</string>
+
+    /// Slide one
+    <string name="hello_img">hello img</string>
+    <string name="welcome">Welcome!</string>
+    <string name="welcome_message">You are here because you want to improve your pullup game. This app will create a custom program for you to be able to do 20 pullups. All you need is a high bar and discipline.</string>
+    <string name="welcome_message_continuation">The program will take between 6 and 8 weeks, depending on your current level.</string>
+
+    /// Slide two
+    <string name="arm_img">arm img</string>
+    <string name="initial_test">Initial test</string>
+    <string name="initial_test_message">In order to setup your training plan, we need to know what is the maximum number of pullups that you can do right now.</string>
+    <string name="initial_test_continuation">If you can\'t do any pullups ,don\'t worry! The program also covers that.</string>
+    <string name="lets_do_this">Lets do this!</string>
+
+
 </resources>

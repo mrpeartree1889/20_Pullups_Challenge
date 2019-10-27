@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,7 +24,8 @@
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/onboarding_hello" />
+            app:srcCompat="@drawable/onboarding_hello"
+            android:contentDescription="@string/hello_img" />
     </FrameLayout>
 
     <TextView
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Welcome!"
+        android:text="@string/welcome"
         android:textColor="@color/colorTextWhite"
         android:textSize="60sp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
@@ -47,7 +47,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="You are here because you want to improve your pullup game. This app will create a custom program for you to be able to do 20 pullups. All you need is a high bar and discipline."
+        android:text="@string/welcome_message"
         android:textColor="@color/colorTextWhite"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
@@ -61,7 +61,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="The program will take between 6 and 8 weeks, depending on your current level."
+        android:text="@string/welcome_message_continuation"
         android:textColor="@color/colorTextWhite"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
