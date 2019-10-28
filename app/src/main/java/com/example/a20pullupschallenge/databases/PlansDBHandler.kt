@@ -8,7 +8,7 @@ import com.example.a20pullupschallenge.Sets
 import org.jetbrains.anko.db.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-
+// Todo clean all LOGS
 class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "PlansDatabase", null, 1) {
     init {
         instance = this

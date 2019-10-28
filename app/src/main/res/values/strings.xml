@@ -12,7 +12,7 @@
 
     /// Workout activity kt
     <string name="done">Done</string>
-    <string name="rest_complete">Rest complete</string>
+    <string name="skip_rest">Skip rest</string>
     <string name="workout_complete_great">Great!</string>
     /// Workout activity layout
     <string name="week_x_of_y_placeholder">Week x of y</string>
@@ -62,7 +62,7 @@
     <string name="dash">-</string>
     <string name="achieved">Achieved</string>
     <string name="set_placeholder">Set x</string>
-    <string name="set_number">Set %1$i</string>
+    <string name="set_number">Set %1$s</string>
     <string name="hundredtwenty">120</string>
     <string name="seconds_rest">seconds rest</string>
     <string name="next_placeholder">Next: this</string>
@@ -75,7 +75,7 @@
 
     /// Layout workout welcome
     <string name="zero_pullups_placeholder">0 pullups</string>
-    <string name="pullups_plan">%1$i pullups</string>
+    <string name="pullups_plan">%1$s pullups</string>
     <string name="rest">Rest</string>
     <string name="rest_time">120 sec.</string>
 
