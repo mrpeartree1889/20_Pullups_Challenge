@@ -2,6 +2,7 @@ package com.example.a20pullupschallenge.databases
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import android.util.Log
 import com.example.a20pullupschallenge.DayWorkout
 import com.example.a20pullupschallenge.Sets
 import org.jetbrains.anko.db.*
@@ -21,19 +22,6 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        // Here you create tables
-//        db.createTable("Plan", true,
-//            "planId" to TEXT,
-//            "startDate" to TEXT,
-//            "week" to INTEGER,
-//            "day" to INTEGER,
-//            "status" to TEXT,
-//            "setOne" to INTEGER,
-//            "setTwo" to INTEGER,
-//            "setThree" to INTEGER,
-//            "setFour" to INTEGER,
-//            "setFive" to INTEGER)
-
         createTable(db)
     }
 
@@ -50,7 +38,7 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
         val currentDate = current.format(formatter)
 
         // initialize DayWorkout class
-        var dayWorkout : DayWorkout = DayWorkout()
+        val dayWorkout : DayWorkout = DayWorkout()
 
         // open DB
         val db = this.writableDatabase
@@ -78,21 +66,22 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
                 dayWorkout.planId = "beg_${numInitialPullups}_${currentDate}"
                 dayWorkout.startDate = currentDate
 
-                /// TEMPORARY NUMBER DONT FORGET TO CHANGE////////////////////////////////////////////////////////////
+                /// TODO dont forget to change this number
                 dayWorkout.totNumWeeks = 2
-                //////////////////////////////////////////////////////////////////////////////////////////
 
                 dayWorkout.status = "plan"
 
 
                 when (numInitialPullups) {
+
                     0 -> {
                         for (week in 1..dayWorkout.totNumWeeks) {
                             for (day in 1..3) {
+                                if (week == 1 && day == 1) {dayWorkout.status = "next"} else {dayWorkout.status = "plan"}
                                 dayWorkout.week = week
                                 dayWorkout.day = day
                                 when {
-                                    week == 1 && day == 1-> {dayWorkout.workoutSets = Sets(-1,-1,-1,-1,-1)}
+                                    week == 1 && day == 1-> { dayWorkout.workoutSets = Sets(-1,-1,-1,-1,-1) }
                                     week == 1 && day == 2-> {dayWorkout.workoutSets = Sets(-1,-1,-1,-1,-1)}
                                     week == 1 && day == 3-> {dayWorkout.workoutSets = Sets(-1,-1,-1,-1,1) }
 
@@ -111,7 +100,9 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
                                 dayWorkout.week = week
                                 dayWorkout.day = day
                                 when {
-                                    week == 1 && day == 1-> {dayWorkout.workoutSets = Sets(1,-1,-1,-1,-1)}
+                                    week == 1 && day == 1-> {
+                                        dayWorkout.workoutSets = Sets(1,-1,-1,-1,-1)
+                                        dayWorkout.status = "next"}
                                     week == 1 && day == 2-> {dayWorkout.workoutSets = Sets(1,1,-1,1,-1)}
                                     week == 1 && day == 3-> {dayWorkout.workoutSets = Sets(1,1,-1,-1,2)}
 
@@ -130,7 +121,9 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
                                 dayWorkout.week = week
                                 dayWorkout.day = day
                                 when {
-                                    week == 1 && day == 1-> {dayWorkout.workoutSets = Sets(2,1,1,2,-1)}
+                                    week == 1 && day == 1-> {
+                                        dayWorkout.workoutSets = Sets(2,1,1,2,-1)
+                                        dayWorkout.status = "next"}
                                     week == 1 && day == 2-> {dayWorkout.workoutSets = Sets(2,1,1,2,-1)}
                                     week == 1 && day == 3-> {dayWorkout.workoutSets = Sets(2,1,1,1,2)}
 
@@ -146,6 +139,8 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
                 }
 
             }
+
+            /// TODO create plans for the other situations
 
             // BASIC PLANS (3 TO 5 PULLUPS)
             numInitialPullups in 3..5 -> { // basic plan
@@ -166,6 +161,7 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
         db.close()
     }
 
+    /// this function returns the full plan based on the answer given on the beginning
     fun getPlan() : ArrayList<DayWorkout> {
         val plan = ArrayList<DayWorkout>()
         val db = this.readableDatabase
@@ -191,10 +187,14 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
         return plan
     }
 
+    /// this function returns the week and day number of the next workout
     fun getNextWorkoutWeekAndDay() : ArrayList<Int> {
         val weekAndDay = ArrayList<Int>()
         val db = this.readableDatabase
-        db.select("Plan", "week", "day", "status").exec {
+        Log.e("errorFinding","getNextWorkoutWeekAndDay started")
+        db.select("Plan", "week", "day", "status")
+            .whereArgs("status = {statusVar}", "statusVar" to "next")
+            .exec {
             if (this.count != 0) {
                 while (this.moveToNext()) {
                     if (this.getString(this.getColumnIndex("status")) == "next") {
@@ -205,32 +205,48 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
                 this.close()
             }
         }
+        Log.e("errorFinding","next week is ${weekAndDay[0]} and next day is ${weekAndDay[1]}")
         db.close()
         return weekAndDay
     }
 
     // TODO Finish this method to get the workout of the day
 
-//    fun getNextWorkout() : DayWorkout {
-//        val dayWorkout = DayWorkout()
-//        val db = this.readableDatabase
-//        db.select("Plan", "week", "day", "status", "setOne", "setTwo", "setThree", "setFour", "setFive")
-//            .whereArgs("")
-//            .exec {
-//            if (this.count != 0) {
-//                while (this.moveToNext()) {
-//                    if (this.getString(this.getColumnIndex("status")) == "next") {
-//                        weekAndDay.add(this.getInt(this.getColumnIndex("week")))
-//                        weekAndDay.add(this.getInt(this.getColumnIndex("day")))
-//                    }
-//                }
-//                this.close()
-//            }
-//        }
-//        db.close()
-//        return weekAndDay
-//    }
+    fun getNextWorkout(week: Int, day: Int) : DayWorkout {
+        Log.e("errorFinding","Db handler function initiated and week is $week and day is $day")
+        val dayWorkout = DayWorkout()
+        val db = this.readableDatabase
+        Log.e("errorFinding","Db opened")
+        db.select("Plan", "week", "day", "status", "setOne", "setTwo", "setThree", "setFour", "setFive")
+            .whereArgs("(week = {weekNumber}) and (day = {dayNumber})", "weekNumber" to week, "dayNumber" to day)
+            .exec {
+                Log.e("errorFinding","db opened and retrieved where clause fine")
+                Log.e("errorFinding","cursor count is ${this.count}")
+            if (this.count != 0) {
+                this.moveToFirst()
+                Log.e("errorFinding","cursor on first and index is ${this.getColumnIndex("planId")}")
+                Log.e("errorFinding","cursor on ${this} and week is ${this.getInt(this.getColumnIndex("week"))}")
+                Log.e("errorFinding","cursor on ${this} and day is ${this.getInt(this.getColumnIndex("day"))}")
+//                    dayWorkout.planId = this.getString(this.getColumnIndex("planId"))
+                dayWorkout.week = this.getInt(this.getColumnIndex("week"))
+                dayWorkout.day = this.getInt(this.getColumnIndex("day"))
+                dayWorkout.status = this.getString(this.getColumnIndex("status"))
+                dayWorkout.workoutSets.setOne = this.getInt(this.getColumnIndex("setOne"))
+                dayWorkout.workoutSets.setTwo = this.getInt(this.getColumnIndex("setTwo"))
+                dayWorkout.workoutSets.setThree = this.getInt(this.getColumnIndex("setThree"))
+                dayWorkout.workoutSets.setFour = this.getInt(this.getColumnIndex("setFour"))
+                dayWorkout.workoutSets.setFive = this.getInt(this.getColumnIndex("setFive"))
+                Log.e("errorFinding","dayWorkout completed")
 
+                this.close()
+            }
+        }
+        Log.e("errorFinding","dayWorkout populated with week ${dayWorkout.week} and day ${dayWorkout.day}, ${dayWorkout.workoutSets.setOne} / ${dayWorkout.workoutSets.setTwo} / ... ")
+        db.close()
+        return dayWorkout
+    }
+
+    // this function drops the current table after the user asks to reset progress and start from the beginning
     fun dropTable() {
         val db = this.writableDatabase
         db.dropTable("Plan", true)
@@ -251,6 +267,7 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
             "setFive" to INTEGER)
     }
 
+    // this function checks if there is a table created
     fun checkTable(): Boolean {
         val db = this.readableDatabase
         var week = 0
@@ -263,8 +280,4 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
         return week > 0
     }
 }
-
-// Access property for Context
-//val Context.database: MyDatabaseOpenHelper
-//    get() = MyDatabaseOpenHelper.getInstance(this)
 

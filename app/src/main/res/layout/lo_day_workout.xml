@@ -3,6 +3,7 @@
     android:id="@+id/dayWorkoutLo"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginVertical="1dp"
     android:weightSum="7">
 
     <TextView

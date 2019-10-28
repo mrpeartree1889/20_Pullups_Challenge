@@ -16,9 +16,9 @@
     <string name="workout_complete_great">Great!</string>
     /// Workout activity layout
     <string name="week_x_of_y_placeholder">Week x of y</string>
-    <string name="week_x_of_y">Week %1$i of %2$i</string>
+    <string name="week_x_of_y">Week %1$s of %2$s</string>
     <string name="day_x_of_y_placeholder">Day x of y</string>
-    <string name="day_x_of_y">Day %1$i of %2$i</string>
+    <string name="day_x_of_y">Day %1$s of %2$s</string>
     <string name="start_workout_btn">Start workout</string>
     <string name="cancel_btn">Cancel</string>
 
@@ -91,6 +91,10 @@
     <string name="initial_test_message">In order to setup your training plan, we need to know what is the maximum number of pullups that you can do right now.</string>
     <string name="initial_test_continuation">If you can\'t do any pullups ,don\'t worry! The program also covers that.</string>
     <string name="lets_do_this">Lets do this!</string>
+
+    /// Plan adapter
+    <string name="week_adapter">W%1$s</string>
+    <string name="day_adapter">Day %1$i</string>
 
 
 </resources>

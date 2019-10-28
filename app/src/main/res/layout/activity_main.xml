@@ -144,6 +144,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:gravity="center"
             android:weightSum="7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -153,7 +154,18 @@
                 android:id="@+id/dayText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="1"
+                android:text="Week"
+                android:textAlignment="center"
+                android:textColor="@color/colorTextPrimary" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Day"
+                android:textAlignment="center"
                 android:textColor="@color/colorTextPrimary" />
 
             <TextView

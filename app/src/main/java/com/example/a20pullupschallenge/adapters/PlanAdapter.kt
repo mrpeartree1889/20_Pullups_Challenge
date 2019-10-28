@@ -4,11 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a20pullupschallenge.DayWorkout
 import com.example.a20pullupschallenge.R
 import com.example.a20pullupschallenge.activities.MainActivity
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.activity_main.view.dayText
 import kotlinx.android.synthetic.main.activity_main.view.setFive
 import kotlinx.android.synthetic.main.activity_main.view.setFour
@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.view.setOne
 import kotlinx.android.synthetic.main.activity_main.view.setThree
 import kotlinx.android.synthetic.main.activity_main.view.setTwo
 import kotlinx.android.synthetic.main.lo_day_workout.view.*
+import org.jetbrains.anko.textColorResource
 
 class PlanAdapter(val context: Context, val plan :  ArrayList<DayWorkout>, val activity: MainActivity) : RecyclerView.Adapter<PlanAdapter.ViewHolder>() {
 
@@ -40,11 +41,17 @@ class PlanAdapter(val context: Context, val plan :  ArrayList<DayWorkout>, val a
         if (dayWorkout.status == "complete") {
             holder.tableLo.alpha = 0.4f
         } else if (dayWorkout.status == "next") {
-            holder.setOne.setBackgroundResource(R.color.colorPrimary)
+            holder.day.textColorResource = R.color.colorPrimary
+            holder.setOne.textColorResource = R.color.colorPrimary
+            holder.setTwo.textColorResource = R.color.colorPrimary
+            holder.setThree.textColorResource = R.color.colorPrimary
+            holder.setFour.textColorResource = R.color.colorPrimary
+            holder.setFive.textColorResource = R.color.colorPrimary
         }
 
-        holder.week.text = "W" + dayWorkout.week.toString()
-        holder.day.text = "Day " + dayWorkout.day.toString()
+
+        holder.week.text = dayWorkout.week.toString()
+        holder.day.text = dayWorkout.day.toString()
         holder.setOne.text = dayWorkout.workoutSets.setOne.toString()
         holder.setTwo.text = dayWorkout.workoutSets.setTwo.toString()
         holder.setThree.text = dayWorkout.workoutSets.setThree.toString()
@@ -54,7 +61,7 @@ class PlanAdapter(val context: Context, val plan :  ArrayList<DayWorkout>, val a
 
     class ViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
         val day = itemView.dayText
-        val tableLo = itemView.tableLo
+        val tableLo = itemView.dayWorkoutLo
         val setOne = itemView.setOne
         val setTwo = itemView.setTwo
         val setThree = itemView.setThree
