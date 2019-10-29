@@ -60,88 +60,6 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
 
         // WORKOUT PLANS
         when {
-
-            // BEGINNERS PLANS (0 TO 3 PULLUPS)
-            numInitialPullups < 3 -> { // beginners plan
-                dayWorkout.planId = "beg_${numInitialPullups}_${currentDate}"
-                dayWorkout.startDate = currentDate
-
-                /// TODO dont forget to change this number
-                dayWorkout.totNumWeeks = 6
-
-                dayWorkout.status = "plan"
-
-
-                when (numInitialPullups) {
-
-                    // TODO delete 0 to 2
-//                    0 -> {
-//                        for (week in 1..dayWorkout.totNumWeeks) {
-//                            for (day in 1..3) {
-//                                if (week == 1 && day == 1) {dayWorkout.status = "next"} else {dayWorkout.status = "plan"}
-//                                dayWorkout.week = week
-//                                dayWorkout.day = day
-//                                when {
-//                                    week == 1 && day == 1-> { dayWorkout.workoutSets = Sets(-1,-1,-1,-1,-1) }
-//                                    week == 1 && day == 2-> {dayWorkout.workoutSets = Sets(-1,-1,-1,-1,-1)}
-//                                    week == 1 && day == 3-> {dayWorkout.workoutSets = Sets(-1,-1,-1,-1,1) }
-//
-//                                    week == 2 && day == 1-> {dayWorkout.workoutSets = Sets(1,-1,-1,-1,-1)}
-//                                    week == 2 && day == 2-> {dayWorkout.workoutSets = Sets(1,-1,1,-1,-1)}
-//                                    week == 2 && day == 3-> {dayWorkout.workoutSets = Sets(1,-1,1,-1,20)}
-//                                }
-//
-//                                addWorkoutToDB(dayWorkout)
-//                            }
-//                        }
-//                    }
-//                    1 -> {
-//                        for (week in 1..dayWorkout.totNumWeeks) {
-//                            for (day in 1..3) {
-//                                dayWorkout.week = week
-//                                dayWorkout.day = day
-//                                when {
-//                                    week == 1 && day == 1-> {
-//                                        dayWorkout.workoutSets = Sets(1,-1,-1,-1,-1)
-//                                        dayWorkout.status = "next"}
-//                                    week == 1 && day == 2-> {dayWorkout.workoutSets = Sets(1,1,-1,1,-1)}
-//                                    week == 1 && day == 3-> {dayWorkout.workoutSets = Sets(1,1,-1,-1,2)}
-//
-//                                    week == 2 && day == 1-> {dayWorkout.workoutSets = Sets(1,1,-1,1,-1)}
-//                                    week == 2 && day == 2-> {dayWorkout.workoutSets = Sets(1,1,-1,1,-1)}
-//                                    week == 2 && day == 3-> {dayWorkout.workoutSets = Sets(1,-1,1,-1,20)}
-//                                }
-//
-//                                addWorkoutToDB(dayWorkout)
-//                            }
-//                        }
-//                    }
-//                    2 -> {
-//                        for (week in 1..dayWorkout.totNumWeeks) {
-//                            for (day in 1..3) {
-//                                dayWorkout.week = week
-//                                dayWorkout.day = day
-//                                when {
-//                                    week == 1 && day == 1-> {
-//                                        dayWorkout.workoutSets = Sets(2,1,1,2,-1)
-//                                        dayWorkout.status = "next"}
-//                                    week == 1 && day == 2-> {dayWorkout.workoutSets = Sets(2,1,1,2,-1)}
-//                                    week == 1 && day == 3-> {dayWorkout.workoutSets = Sets(2,1,1,1,2)}
-//
-//                                    week == 2 && day == 1-> {dayWorkout.workoutSets = Sets(2,2,1,2,-1)}
-//                                    week == 2 && day == 2-> {dayWorkout.workoutSets = Sets(2,2,1,2,-1)}
-//                                    week == 2 && day == 3-> {dayWorkout.workoutSets = Sets(2,1,1,1,20)}
-//                                }
-//
-//                                addWorkoutToDB(dayWorkout)
-//                            }
-//                        }
-//                    }
-                }
-            }
-
-
-
             // BASIC PLANS (3 TO 5 PULLUPS)
             numInitialPullups in 2..6 -> {
                 dayWorkout.planId = "bas_${numInitialPullups}_${currentDate}"
@@ -179,22 +97,93 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
                             week == 6 && day == 2-> {dayWorkout.workoutSets = Sets(8,9,10, 11, 12)}
                             week == 6 && day == 3-> {dayWorkout.workoutSets = Sets(13,11,9,7,20)}
                         }
-
                         addWorkoutToDB(dayWorkout)
                     }
                 }
-
             }
 
-            /// TODO create plans for the other situations
             // INTERMEDIATE PLANS (6 TO 9 PULLUPS)
-            numInitialPullups in 6..9 -> {
+            numInitialPullups in 5..10 -> {
+                dayWorkout.planId = "int_${numInitialPullups}_${currentDate}"
+                dayWorkout.startDate = currentDate
+                dayWorkout.totNumWeeks = 6
+                dayWorkout.status = "plan"
 
+                for (week in 1..dayWorkout.totNumWeeks) {
+                    for (day in 1..3) {
+                        if (week == 1 && day == 1) {dayWorkout.status = "next"} else {dayWorkout.status = "plan"}
+                        dayWorkout.week = week
+                        dayWorkout.day = day
+                        when {
+                            week == 1 && day == 1-> { dayWorkout.workoutSets = Sets(4,3,2,4,5) }
+                            week == 1 && day == 2-> {dayWorkout.workoutSets = Sets(4,3,3,4,5)}
+                            week == 1 && day == 3-> {dayWorkout.workoutSets = Sets(4,4,4,3,20) }
+
+                            week == 2 && day == 1-> {dayWorkout.workoutSets = Sets(5,4,3,4,5)}
+                            week == 2 && day == 2-> {dayWorkout.workoutSets = Sets(4,4,3,4,6)}
+                            week == 2 && day == 3-> {dayWorkout.workoutSets = Sets(4,4,4,4,20)}
+
+                            week == 3 && day == 1-> {dayWorkout.workoutSets = Sets(6,5,4,5,6)}
+                            week == 3 && day == 2-> {dayWorkout.workoutSets = Sets(6,5,6,5, 6)}
+                            week == 3 && day == 3-> {dayWorkout.workoutSets = Sets(7,6,5,4,20)}
+
+                            week == 4 && day == 1-> {dayWorkout.workoutSets = Sets(5,6,7,8,9)}
+                            week == 4 && day == 2-> {dayWorkout.workoutSets = Sets(7,6,7,8, 9)}
+                            week == 4 && day == 3-> {dayWorkout.workoutSets = Sets(10,8,7,6,20)}
+
+                            week == 5 && day == 1-> {dayWorkout.workoutSets = Sets(5,6,7,8,9)}
+                            week == 5 && day == 2-> {dayWorkout.workoutSets = Sets(10,8,10, 8, 10)}
+                            week == 5 && day == 3-> {dayWorkout.workoutSets = Sets(7,8,9,11,12)}
+
+                            week == 6 && day == 1-> {dayWorkout.workoutSets = Sets(6,7,8,9,11)}
+                            week == 6 && day == 2-> {dayWorkout.workoutSets = Sets(10,11,12, 13, 14)}
+                            week == 6 && day == 3-> {dayWorkout.workoutSets = Sets(14,12,11,9,20)}
+                        }
+                        addWorkoutToDB(dayWorkout)
+                    }
+                }
             }
 
             // ADVANCED PLANS (10+ PULLUPS)
-            numInitialPullups >= 10 -> { // advanced plan
+            numInitialPullups in 9..25 -> {
+                dayWorkout.planId = "adv_${numInitialPullups}_${currentDate}"
+                dayWorkout.startDate = currentDate
+                dayWorkout.totNumWeeks = 6
+                dayWorkout.status = "plan"
 
+                for (week in 1..dayWorkout.totNumWeeks) {
+                    for (day in 1..3) {
+                        if (week == 1 && day == 1) {dayWorkout.status = "next"} else {dayWorkout.status = "plan"}
+                        dayWorkout.week = week
+                        dayWorkout.day = day
+                        when {
+                            week == 1 && day == 1-> { dayWorkout.workoutSets = Sets(6,6,4,7,9) }
+                            week == 1 && day == 2-> {dayWorkout.workoutSets = Sets(7,6,6,8,9)}
+                            week == 1 && day == 3-> {dayWorkout.workoutSets = Sets(8,8,8,6,20) }
+
+                            week == 2 && day == 1-> {dayWorkout.workoutSets = Sets(8,7,6,7,8)}
+                            week == 2 && day == 2-> {dayWorkout.workoutSets = Sets(8,7,7,6,10)}
+                            week == 2 && day == 3-> {dayWorkout.workoutSets = Sets(8,8,7,7,20)}
+
+                            week == 3 && day == 1-> {dayWorkout.workoutSets = Sets(9,7,6,7,9)}
+                            week == 3 && day == 2-> {dayWorkout.workoutSets = Sets(9,7,8,7, 9)}
+                            week == 3 && day == 3-> {dayWorkout.workoutSets = Sets(10,8,6,7,20)}
+
+                            week == 4 && day == 1-> {dayWorkout.workoutSets = Sets(6,7,8,9,11)}
+                            week == 4 && day == 2-> {dayWorkout.workoutSets = Sets(7,8,9,10, 11)}
+                            week == 4 && day == 3-> {dayWorkout.workoutSets = Sets(12,10,8,7,20)}
+
+                            week == 5 && day == 1-> {dayWorkout.workoutSets = Sets(6,7,8,9,11)}
+                            week == 5 && day == 2-> {dayWorkout.workoutSets = Sets(12,10,12, 10, 12)}
+                            week == 5 && day == 3-> {dayWorkout.workoutSets = Sets(10,11,12,13,15)}
+
+                            week == 6 && day == 1-> {dayWorkout.workoutSets = Sets(7,8,9,10,12)}
+                            week == 6 && day == 2-> {dayWorkout.workoutSets = Sets(11,12,13, 14, 15)}
+                            week == 6 && day == 3-> {dayWorkout.workoutSets = Sets(15,1311,12,10, 20)}
+                        }
+                        addWorkoutToDB(dayWorkout)
+                    }
+                }
             }
         }
 

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.transition.Scene
 import android.transition.TransitionManager
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
@@ -15,13 +14,9 @@ import com.example.a20pullupschallenge.DayWorkout
 import com.example.a20pullupschallenge.R
 import com.example.a20pullupschallenge.databases.MyDatabaseOpenHelper
 import kotlinx.android.synthetic.main.activity_workout.*
-import kotlinx.android.synthetic.main.lo_workout_set.*
 import org.jetbrains.anko.alert
-import org.jetbrains.anko.custom.style
 import org.jetbrains.anko.startActivity
-import org.w3c.dom.Text
 
-// TODO delete logs
 class WorkoutActivity : AppCompatActivity() {
 
     val Context.planDatabase: MyDatabaseOpenHelper
@@ -47,7 +42,6 @@ class WorkoutActivity : AppCompatActivity() {
             dayWorkoutPlan.workoutSets.setFive)
         val setsAchieved : ArrayList<Int> = arrayListOf(0,0,0,0,0,0,0)
 
-
         // Load layouts as scenes
         val sceneRoot: ViewGroup = findViewById(R.id.fragLayout)
         val welcomeScene: Scene = Scene.getSceneForLayout(sceneRoot, R.layout.lo_workout_welcome, this)
@@ -56,10 +50,8 @@ class WorkoutActivity : AppCompatActivity() {
         val completeScene: Scene = Scene.getSceneForLayout(sceneRoot, R.layout.lo_workout_complete, this)
 
         // Update values of main layout
-        // TODO change "8" to total number of weeks in workout
-        weekText.text = getString(R.string.week_x_of_y, weekCurrent.toString(), "8")
+        weekText.text = getString(R.string.week_x_of_y, weekCurrent.toString(), dayWorkoutPlan.totNumWeeks.toString())
         dayText.text = getString(R.string.day_x_of_y, dayCurrent.toString(), "3")
-
 
         // Layout manager
         TransitionManager.go(welcomeScene)
@@ -168,7 +160,6 @@ class WorkoutActivity : AppCompatActivity() {
                                 populateTable(setsPlanned, setsAchieved, currentSetNumber)
 
                                 currentSetNumber += 1
-
                             }
                         }
                         countDownTimer.start()
@@ -215,8 +206,8 @@ class WorkoutActivity : AppCompatActivity() {
         setOnePlanned.text = setsPlanned[1].toString()
         setTwoPlanned.text = setsPlanned[2].toString()
         setThreePlanned.text = setsPlanned[3].toString()
-        setFourPlanned.text = setsPlanned[3].toString()
-        setFivePlanned.text = setsPlanned[4].toString()
+        setFourPlanned.text = setsPlanned[4].toString()
+        setFivePlanned.text = setsPlanned[5].toString()
 
         if (setsAchieved[1] == 0) {setOneAchieved.text = "-"} else {setOneAchieved.text = setsAchieved[1].toString()}
         if (setsAchieved[2] == 0) {setTwoAchieved.text = "-"} else {setTwoAchieved.text = setsAchieved[2].toString()}
@@ -249,6 +240,34 @@ class WorkoutActivity : AppCompatActivity() {
         if (currentSetNumber == 5) {
             setFiveTitle.setBackgroundResource(R.color.colorPrimaryDark)
             setFiveTitle.setTextColor(getColor(R.color.colorTextWhite))
+        }
+
+        if (currentSetNumber == 6) {
+            if (setsPlanned[1] <= setsAchieved[1]) {
+                setOneAchieved.setBackgroundResource(R.color.colorAppGreen)
+            } else if (setsPlanned[4] > setsAchieved[4]){
+                setOneAchieved.setBackgroundResource(R.color.colorAppOrange)
+            }
+            if (setsPlanned[2] <= setsAchieved[2]) {
+                setTwoAchieved.setBackgroundResource(R.color.colorAppGreen)
+            } else if (setsPlanned[4] > setsAchieved[4]){
+                setTwoAchieved.setBackgroundResource(R.color.colorAppOrange)
+            }
+            if (setsPlanned[3] <= setsAchieved[3]) {
+                setThreeAchieved.setBackgroundResource(R.color.colorAppGreen)
+            } else if (setsPlanned[4] > setsAchieved[4]){
+                setThreeAchieved.setBackgroundResource(R.color.colorAppOrange)
+            }
+            if (setsPlanned[4] <= setsAchieved[4]) {
+                setFourAchieved.setBackgroundResource(R.color.colorAppGreen)
+            } else if (setsPlanned[4] > setsAchieved[4]){
+                setFourAchieved.setBackgroundResource(R.color.colorAppOrange)
+            }
+            if (setsPlanned[5] <= setsAchieved[5]) {
+                setFiveAchieved.setBackgroundResource(R.color.colorAppGreen)
+            } else if (setsPlanned[4] > setsAchieved[4]){
+                setFiveAchieved.setBackgroundResource(R.color.colorAppOrange)
+            }
         }
     }
 
