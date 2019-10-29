@@ -28,7 +28,7 @@
     <string name="bckg_blue">Bckg blue</string>
     <string name="create_plan_title">Create your personalized workout</string>
     <string name="create_plan_btn">Create plan</string>
-    <string name="pullups_question">How many pullups can you do in a row now? (it\'s okay if you can\'t do any)</string>
+    <string name="pullups_question">How many pullups can you do in a row now? (minimum of 3)</string>
 
     /// Main activity
     <string name="create_pers_workout">Create your personalized workout</string>
@@ -48,7 +48,7 @@
     <string name="complete_tick_img">Complete tick img</string>
     <string name="challenge_completed_today">Challenge\ncompleted\ntoday</string>
     <string name="pullups_achieved_placeholder">You achieved a total of x pullups</string>
-    <string name="pullups_achieved">You achieved a total of %1$i pullups</string>
+    <string name="pullups_achieved">You achieved a total of %1$s pullups</string>
     <string name="good_job">Good job!</string>
 
     /// Layout workout rest
@@ -82,15 +82,15 @@
     /// Slide one
     <string name="hello_img">hello img</string>
     <string name="welcome">Welcome!</string>
-    <string name="welcome_message">You are here because you want to improve your pullup game. This app will create a custom program for you to be able to do 20 pullups. All you need is a high bar and discipline.</string>
-    <string name="welcome_message_continuation">The program will take between 6 and 8 weeks, depending on your current level.</string>
+    <string name="welcome_message">You are here because you want to improve your pullup game. This app will create a custom program for you to be able to do 20 pullups. You should be able to do 3 pullups in a row to begin the program.</string>
+    <string name="welcome_message_continuation">The program will take about 6 weeks.</string>
 
     /// Slide two
     <string name="arm_img">arm img</string>
     <string name="initial_test">Initial test</string>
     <string name="initial_test_message">In order to setup your training plan, we need to know what is the maximum number of pullups that you can do right now.</string>
-    <string name="initial_test_continuation">If you can\'t do any pullups ,don\'t worry! The program also covers that.</string>
-    <string name="lets_do_this">Lets do this!</string>
+    <string name="initial_test_continuation">Go to the pullup bar and do your best!</string>
+    <string name="lets_do_this">Lets do this</string>
 
     /// Plan adapter
     <string name="week_adapter">W%1$s</string>

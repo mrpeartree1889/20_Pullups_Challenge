@@ -19,7 +19,7 @@ class CreatePlan : AppCompatActivity() {
 
         var numberPicked = 0
         if (createPlanNumberPicker != null) {
-            createPlanNumberPicker.minValue = 0
+            createPlanNumberPicker.minValue = 3
             createPlanNumberPicker.maxValue = 20
             createPlanNumberPicker.wrapSelectorWheel = false
             createPlanNumberPicker.setOnValueChangedListener { _, _, newVal ->

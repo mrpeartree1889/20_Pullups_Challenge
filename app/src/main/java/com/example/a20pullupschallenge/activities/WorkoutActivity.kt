@@ -112,6 +112,12 @@ class WorkoutActivity : AppCompatActivity() {
 
                     if(currentSetNumber == 5) {
                         TransitionManager.go(completeScene)
+                        currentSetNumber = 6
+                        populateTable(setsPlanned, setsAchieved, currentSetNumber)
+
+                        val completedPullups = setsAchieved.sum() - setsAchieved[0]
+                        val completePullupsText : TextView = findViewById(R.id.textView16)
+                        completePullupsText.text = getString(R.string.pullups_achieved, completedPullups.toString())
                         cancelBtn.visibility = View.GONE
                         mainBtn.text = getString(R.string.workout_complete_great)
                         activeScene = "complete"
@@ -190,23 +196,6 @@ class WorkoutActivity : AppCompatActivity() {
         setFourPullups.text = getString(R.string.pullups_plan, setsPlanned[4].toString())
         setFivePullups.text = getString(R.string.pullups_plan, setsPlanned[5].toString())
     }
-
-    private fun popWorkAccomp(dayWorkoutPlan : DayWorkout) : DayWorkout {
-        val workAccomp = DayWorkout()
-        workAccomp.week = dayWorkoutPlan.week
-        workAccomp.day = dayWorkoutPlan.day
-        workAccomp.planId = dayWorkoutPlan.planId
-        workAccomp.totNumWeeks = dayWorkoutPlan.totNumWeeks
-        workAccomp.status = "accomp"
-        workAccomp.workoutSets.setOne = 0
-        workAccomp.workoutSets.setTwo = 0
-        workAccomp.workoutSets.setThree = 0
-        workAccomp.workoutSets.setFour = 0
-        workAccomp.workoutSets.setFive = 0
-
-        return workAccomp
-    }
-
 
     // populates table of planned and achieved pullups plus returns an Int that says which set it is
     private fun populateTable(setsPlanned : ArrayList<Int>, setsAchieved : ArrayList<Int>, currentSetNumber : Int) {
@@ -306,6 +295,4 @@ class WorkoutActivity : AppCompatActivity() {
 
         planDatabase.addAccomplishedWorkout(dayWorkoutCompleted)
     }
-
-
 }

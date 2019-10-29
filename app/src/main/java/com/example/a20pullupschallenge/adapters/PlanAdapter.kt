@@ -38,15 +38,22 @@ class PlanAdapter(val context: Context, val plan :  ArrayList<DayWorkout>, val a
             holder.week.alpha = 0f
         }
 
-        if (dayWorkout.status == "complete") {
+        if (dayWorkout.status == "accomp") {
             holder.tableLo.alpha = 0.4f
         } else if (dayWorkout.status == "next") {
-            holder.day.textColorResource = R.color.colorPrimary
-            holder.setOne.textColorResource = R.color.colorPrimary
-            holder.setTwo.textColorResource = R.color.colorPrimary
-            holder.setThree.textColorResource = R.color.colorPrimary
-            holder.setFour.textColorResource = R.color.colorPrimary
-            holder.setFive.textColorResource = R.color.colorPrimary
+            holder.day.setBackgroundResource(R.color.colorPrimaryDark)
+            holder.setOne.setBackgroundResource(R.color.colorPrimaryDark)
+            holder.setTwo.setBackgroundResource(R.color.colorPrimaryDark)
+            holder.setThree.setBackgroundResource(R.color.colorPrimaryDark)
+            holder.setFour.setBackgroundResource(R.color.colorPrimaryDark)
+            holder.setFive.setBackgroundResource(R.color.colorPrimaryDark)
+
+            holder.day.textColorResource = R.color.colorTextWhite
+            holder.setOne.textColorResource = R.color.colorTextWhite
+            holder.setTwo.textColorResource = R.color.colorTextWhite
+            holder.setThree.textColorResource = R.color.colorTextWhite
+            holder.setFour.textColorResource = R.color.colorTextWhite
+            holder.setFive.textColorResource = R.color.colorTextWhite
         }
 
 

@@ -20,10 +20,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/setOneLo"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/shape_workout_welcome_blue"
         app:layout_constraintBottom_toTopOf="@+id/setTwoLo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,10 +79,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/setTwoLo"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/shape_workout_welcome_blue"
         app:layout_constraintBottom_toTopOf="@+id/setThreeLo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -140,10 +138,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/setThreeLo"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/shape_workout_welcome_blue"
         app:layout_constraintBottom_toTopOf="@+id/setFourLo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -200,10 +197,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/setFourLo"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/shape_workout_welcome_blue"
         app:layout_constraintBottom_toTopOf="@+id/setFiveLo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -260,10 +256,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/setFiveLo"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/shape_workout_welcome_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -78,8 +78,6 @@ class MainActivity : AppCompatActivity() {
         } else if (createNewPlanBtn.visibility == View.VISIBLE) {
             focusOnBckg()
         }
-
-
     }
 
     fun createNewPlanBtnClicked (view: View){
