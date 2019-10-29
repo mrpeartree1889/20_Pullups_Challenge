@@ -14,6 +14,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.a20pullupschallenge.DayWorkout
 import com.example.a20pullupschallenge.R
 import com.example.a20pullupschallenge.databases.MyDatabaseOpenHelper
@@ -57,14 +58,25 @@ class WorkoutActivity : AppCompatActivity() {
         weekText.text = getString(R.string.week_x_of_y, weekCurrent.toString(), dayWorkoutPlan.totNumWeeks.toString())
         dayText.text = getString(R.string.day_x_of_y, dayCurrent.toString(), "3")
 
+        // TODO clean this up
+
         // Set transition
         var autoTrans : Transition = Slide(Gravity.BOTTOM)
         autoTrans.duration = 1000
 //        autoTrans.startDelay = 200
 
         // Layout manager
-        TransitionManager.go(welcomeScene, autoTrans)
+        TransitionManager.go(welcomeScene)
         populateWelcomeScene(setsPlanned)
+
+//        TODO clean this up
+        /// more animations
+        AnimationUtils.loadAnimation(this, R.anim.slide_test).also { slideAnimation ->
+            findViewById<ConstraintLayout>(R.id.frameLayout2).startAnimation(slideAnimation)
+        }
+        AnimationUtils.loadAnimation(this, R.anim.slide_in_up).also { slideAnimation ->
+            findViewById<ConstraintLayout>(R.id.linearLayout3).startAnimation(slideAnimation)
+        }
 
         // set var with name of active scene
         var activeScene = "welcome"
