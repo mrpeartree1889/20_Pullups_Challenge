@@ -41,7 +41,7 @@ class PlanAdapter(val context: Context, val plan :  ArrayList<DayWorkout>, val a
         if (dayWorkout.status == "accomp") {
             holder.tableLo.alpha = 0.4f
         } else if (dayWorkout.status == "next") {
-            holder.day.setBackgroundResource(R.color.colorPrimaryDark)
+            holder.day.setBackgroundResource(R.color.colorPrimary)
             holder.setOne.setBackgroundResource(R.color.colorPrimaryDark)
             holder.setTwo.setBackgroundResource(R.color.colorPrimaryDark)
             holder.setThree.setBackgroundResource(R.color.colorPrimaryDark)

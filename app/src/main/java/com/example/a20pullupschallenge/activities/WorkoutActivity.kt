@@ -1,13 +1,17 @@
 package com.example.a20pullupschallenge.activities
 
+import android.app.ActivityOptions
 import android.content.Context
+import android.graphics.Path
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.transition.Scene
-import android.transition.TransitionManager
+import android.transition.*
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.a20pullupschallenge.DayWorkout
@@ -53,8 +57,13 @@ class WorkoutActivity : AppCompatActivity() {
         weekText.text = getString(R.string.week_x_of_y, weekCurrent.toString(), dayWorkoutPlan.totNumWeeks.toString())
         dayText.text = getString(R.string.day_x_of_y, dayCurrent.toString(), "3")
 
+        // Set transition
+        var autoTrans : Transition = Slide(Gravity.BOTTOM)
+        autoTrans.duration = 1000
+//        autoTrans.startDelay = 200
+
         // Layout manager
-        TransitionManager.go(welcomeScene)
+        TransitionManager.go(welcomeScene, autoTrans)
         populateWelcomeScene(setsPlanned)
 
         // set var with name of active scene
@@ -62,12 +71,13 @@ class WorkoutActivity : AppCompatActivity() {
         // set var with number of current set
         var currentSetNumber = 1
 
+
+
         // on click for the main button that changes the text displayed in it
         // and the action depending on the active state
         mainBtn.setOnClickListener {
-
             fun startPullupScene() {
-                TransitionManager.go(pullupScene)
+                TransitionManager.go(pullupScene, autoTrans)
                 mainBtn.text = getString(R.string.done)
                 activeScene = "pullup"
 
@@ -103,7 +113,7 @@ class WorkoutActivity : AppCompatActivity() {
                     setsAchieved[currentSetNumber] = viewEdit.text.toString().toInt()
 
                     if(currentSetNumber == 5) {
-                        TransitionManager.go(completeScene)
+                        TransitionManager.go(completeScene, autoTrans)
                         currentSetNumber = 6
                         populateTable(setsPlanned, setsAchieved, currentSetNumber)
 
@@ -115,7 +125,7 @@ class WorkoutActivity : AppCompatActivity() {
                         activeScene = "complete"
 
                     } else {
-                        TransitionManager.go(restScene)
+                        TransitionManager.go(restScene, autoTrans)
 
                         // change text on button, on set number and populate table
                         mainBtn.text = getString(R.string.skip_rest)
@@ -144,7 +154,7 @@ class WorkoutActivity : AppCompatActivity() {
                             }
 
                             override fun onFinish() {
-                                TransitionManager.go(pullupScene)
+                                TransitionManager.go(pullupScene, autoTrans)
                                 mainBtn.text = getString(R.string.done)
                                 activeScene = "pullup"
 
