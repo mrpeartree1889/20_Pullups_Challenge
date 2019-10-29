@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun disclaimerBtnClicked(view: View) {
-        alert("If you continue, you will delete your current progress. Are you sure you want to proceed?", "Disclaimer") {
+        alert {
             title = "test"
             message = "asdiasoidhauhfashdlajsldkj"
             positiveButton("Ok") {}

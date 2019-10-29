@@ -16,8 +16,12 @@ import com.example.a20pullupschallenge.R
 import com.example.a20pullupschallenge.databases.MyDatabaseOpenHelper
 import kotlinx.android.synthetic.main.activity_workout.*
 import kotlinx.android.synthetic.main.lo_workout_set.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.custom.style
 import org.jetbrains.anko.startActivity
+import org.w3c.dom.Text
 
+// TODO delete logs
 class WorkoutActivity : AppCompatActivity() {
 
     val Context.planDatabase: MyDatabaseOpenHelper
@@ -32,8 +36,6 @@ class WorkoutActivity : AppCompatActivity() {
         val dayCurrent = intent.getIntExtra("day",0)
         // get workout from database and create a DayWorkout of the plan
         val dayWorkoutPlan = planDatabase.getNextWorkout(weekCurrent,dayCurrent)
-        // create a DayWorkout based on the plan but with placeholder values for accomplished pullups
-//        var dayWorkoutAchieved = popWorkAccomp(dayWorkoutPlan)
 
         // setup two arrayLists for planned workout and achieved workout
         val setsPlanned : ArrayList<Int> = arrayListOf(
@@ -71,27 +73,41 @@ class WorkoutActivity : AppCompatActivity() {
         // on click for the main button that changes the text displayed in it
         // and the action depending on the active state
         mainBtn.setOnClickListener {
+
+            fun startPullupScene() {
+                TransitionManager.go(pullupScene)
+                mainBtn.text = getString(R.string.done)
+                activeScene = "pullup"
+
+                val setNumber : TextView = findViewById(R.id.setNumber)
+                val pullupNumber : TextView = findViewById(R.id.pullupNumber)
+                val achievedPullupsNumber : TextView = findViewById(R.id.achievedPullupsNumber)
+                setNumber.text = getString(R.string.set_number, currentSetNumber.toString())
+                pullupNumber.text = setsPlanned[currentSetNumber].toString()
+                achievedPullupsNumber.text = setsPlanned[currentSetNumber].toString()
+
+                // action on plus and minus button
+                val plusBtn = findViewById<TextView>(R.id.buttonPlus)
+                val minusBtn = findViewById<TextView>(R.id.buttonMinus)
+                plusBtn.setOnClickListener {plusBtnAction(findViewById(R.id.achievedPullupsNumber))}
+                minusBtn.setOnClickListener {minusBtnAction(findViewById(R.id.achievedPullupsNumber))}
+
+                populateTable(setsPlanned, setsAchieved, currentSetNumber)
+            }
+
             when (activeScene) {
-                /// if we are on welcome scene, take us to pullup
+                /// if we are on welcome or rest scene, take us to pullup
                 "welcome" -> {
-                    TransitionManager.go(pullupScene)
-                    mainBtn.text = getString(R.string.done)
-                    activeScene = "pullup"
-
-                    val setNumber : TextView = findViewById(R.id.setNumber)
-                    val pullupNumber : TextView = findViewById(R.id.pullupNumber)
-                    val achievedPullupsNumber : TextView = findViewById(R.id.achievedPullupsNumber)
-
-                    populateTable(setsPlanned, setsAchieved)
-
-                    setNumber.text = getString(R.string.set_number, currentSetNumber.toString())
-                    pullupNumber.text = setsPlanned[currentSetNumber].toString()
-                    achievedPullupsNumber.text = setsPlanned[currentSetNumber].toString()
+                    startPullupScene()
+                }
+                "rest" -> {
+                    currentSetNumber += 1
+                    startPullupScene()
                 }
 
                 /// if we are on pullup scene, take us to rest, or if set is completed, take us to completion
                 "pullup" -> {
-                    var viewEdit = findViewById<TextView>(R.id.achievedPullupsNumber)
+                    val viewEdit = findViewById<TextView>(R.id.achievedPullupsNumber)
                     setsAchieved[currentSetNumber] = viewEdit.text.toString().toInt()
 
                     if(currentSetNumber == 5) {
@@ -102,12 +118,14 @@ class WorkoutActivity : AppCompatActivity() {
 
                     } else {
                         TransitionManager.go(restScene)
-                        mainBtn.text = getString(R.string.skip_rest)
 
+                        // change text on button, on set number and populate table
+                        mainBtn.text = getString(R.string.skip_rest)
+                        val setNumber : TextView = findViewById(R.id.setNumber)
+                        setNumber.text = getString(R.string.set_number, currentSetNumber.toString())
+                        populateTable(setsPlanned, setsAchieved, currentSetNumber)
 
                         activeScene = "rest"
-
-                        populateTable(setsPlanned, setsAchieved)
 
                         /// Timer for resting
                         val progressBar: ProgressBar = findViewById(R.id.progressBar)
@@ -128,36 +146,33 @@ class WorkoutActivity : AppCompatActivity() {
                             }
 
                             override fun onFinish() {
-                                TransitionManager.go(completeScene)
-                                cancelBtn.visibility = View.GONE
-                                mainBtn.text = getString(R.string.workout_complete_great)
-                                activeScene = "complete"
+                                TransitionManager.go(pullupScene)
+                                mainBtn.text = getString(R.string.done)
+                                activeScene = "pullup"
+
+                                val setNumber : TextView = findViewById(R.id.setNumber)
+                                val pullupNumber : TextView = findViewById(R.id.pullupNumber)
+                                val achievedPullupsNumber : TextView = findViewById(R.id.achievedPullupsNumber)
+
+
+                                setNumber.text = getString(R.string.set_number, currentSetNumber.toString())
+                                pullupNumber.text = setsPlanned[currentSetNumber].toString()
+                                achievedPullupsNumber.text = setsPlanned[currentSetNumber].toString()
+
+                                populateTable(setsPlanned, setsAchieved, currentSetNumber)
+
+                                currentSetNumber += 1
+
                             }
                         }
                         countDownTimer.start()
                     }
                 }
 
-                /// if we are on rest scene, take us to pullup
-                "rest" -> {
-                    TransitionManager.go(pullupScene)
-                    mainBtn.text = getString(R.string.done)
-                    activeScene = "pullup"
-
-                    val setNumber : TextView = findViewById(R.id.setNumber)
-                    val pullupNumber : TextView = findViewById(R.id.pullupNumber)
-                    val achievedPullupsNumber : TextView = findViewById(R.id.achievedPullupsNumber)
-
-
-                    setNumber.text = getString(R.string.set_number, currentSetNumber.toString())
-                    pullupNumber.text = setsPlanned[currentSetNumber].toString()
-                    achievedPullupsNumber.text = setsPlanned[currentSetNumber].toString()
-
-                    currentSetNumber += 1
-
+                "complete" -> {
+                    updateDatabase(dayWorkoutPlan, setsAchieved)
+                    startActivity<MainActivity>()
                 }
-
-                "complete" -> startActivity<MainActivity>()
             }
         }
     }
@@ -194,8 +209,9 @@ class WorkoutActivity : AppCompatActivity() {
 
 
     // populates table of planned and achieved pullups plus returns an Int that says which set it is
-    private fun populateTable(setsPlanned : ArrayList<Int>, setsAchieved : ArrayList<Int>) {
-        val setOnePlanned : TextView = findViewById(R.id.setOnePlan)
+    private fun populateTable(setsPlanned : ArrayList<Int>, setsAchieved : ArrayList<Int>, currentSetNumber : Int) {
+        /// populate values
+        val setOnePlanned: TextView = findViewById(R.id.setOnePlanUnique)
         val setTwoPlanned : TextView = findViewById(R.id.setTwoPlan)
         val setThreePlanned : TextView = findViewById(R.id.setThreePlan)
         val setFourPlanned : TextView = findViewById(R.id.setFourPlan)
@@ -218,6 +234,77 @@ class WorkoutActivity : AppCompatActivity() {
         if (setsAchieved[3] == 0) {setThreeAchieved.text = "-"} else {setThreeAchieved.text = setsAchieved[3].toString()}
         if (setsAchieved[4] == 0) {setFourAchieved.text = "-"} else {setFourAchieved.text = setsAchieved[4].toString()}
         if (setsAchieved[5] == 0) {setFiveAchieved.text = "-"} else {setFiveAchieved.text = setsAchieved[5].toString()}
+
+        /// change background on active set
+        val setOneTitle : TextView = findViewById(R.id.setOneTitle)
+        val setTwoTitle : TextView = findViewById(R.id.setTwoTitle)
+        val setThreeTitle : TextView = findViewById(R.id.setThreeTitle)
+        val setFourTitle : TextView = findViewById(R.id.setFourTitle)
+        val setFiveTitle : TextView = findViewById(R.id.setFiveTitle)
+
+        if (currentSetNumber == 1) {
+            setOneTitle.setBackgroundResource(R.color.colorPrimaryDark)
+            setOneTitle.setTextColor(getColor(R.color.colorTextWhite))
+        }
+        if (currentSetNumber == 2) {
+            setTwoTitle.setBackgroundResource(R.color.colorPrimaryDark)
+            setTwoTitle.setTextColor(getColor(R.color.colorTextWhite))}
+        if (currentSetNumber == 3) {
+            setThreeTitle.setBackgroundResource(R.color.colorPrimaryDark)
+            setThreeTitle.setTextColor(getColor(R.color.colorTextWhite))
+        }
+        if (currentSetNumber == 4) {
+            setFourTitle.setBackgroundResource(R.color.colorPrimaryDark)
+            setFourTitle.setTextColor(getColor(R.color.colorTextWhite))
+        }
+        if (currentSetNumber == 5) {
+            setFiveTitle.setBackgroundResource(R.color.colorPrimaryDark)
+            setFiveTitle.setTextColor(getColor(R.color.colorTextWhite))
+        }
+    }
+
+    private fun plusBtnAction(achievedPullups : TextView) {
+        val value = achievedPullups.text.toString()
+        val currentNumber = Integer.parseInt((value))
+        var newNumber = currentNumber
+
+        if (currentNumber == -1) {
+            newNumber += 2
+        } else if (currentNumber != 0 || currentNumber != -1) {
+            newNumber += 1
+        }
+
+        achievedPullups.text = newNumber.toString()
+    }
+
+    private fun minusBtnAction(achievedPullups : TextView) {
+        val value = achievedPullups.text.toString()
+        val currentNumber = Integer.parseInt((value))
+        val newNumber = currentNumber - 1
+        achievedPullups.text = newNumber.toString()
+    }
+
+    fun cancelBtnClicked(view:View) {
+        alert("If you continue, you will delete your current progress. Are you sure you want to proceed?", "Attention") {
+            positiveButton("Yes, proceed") { startActivity<MainActivity>() }
+            negativeButton("No, continue workout") {}
+        }.show()
+    }
+
+    fun updateDatabase(dayWorkoutPlan : DayWorkout, setsAchieved : ArrayList<Int>) {
+        // change status on planned workout
+        planDatabase.changeStatus(dayWorkoutPlan.week, dayWorkoutPlan.day)
+
+        // add accomplished workout
+        val dayWorkoutCompleted = dayWorkoutPlan
+        dayWorkoutCompleted.status = "accomp"
+        dayWorkoutCompleted.workoutSets.setOne = setsAchieved[1]
+        dayWorkoutCompleted.workoutSets.setTwo = setsAchieved[2]
+        dayWorkoutCompleted.workoutSets.setThree = setsAchieved[3]
+        dayWorkoutCompleted.workoutSets.setFour = setsAchieved[4]
+        dayWorkoutCompleted.workoutSets.setFive = setsAchieved[5]
+
+        planDatabase.addAccomplishedWorkout(dayWorkoutCompleted)
     }
 
 

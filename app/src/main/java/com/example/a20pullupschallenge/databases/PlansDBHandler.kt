@@ -279,5 +279,42 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
 
         return week > 0
     }
+
+    fun changeStatus(week: Int, day: Int) {
+        val db = this.writableDatabase
+        // update finished workout to show planDone
+        db.update("Plan", "status" to "planDone")
+            .whereArgs("(week = {weekN}) and (day = {dayN})", "weekN" to week,"dayN" to day)
+            .exec()
+
+        // update next workout to show next
+        var newDay = day
+        var newWeek = week
+        if(day == 3) {
+            newDay = 1
+            newWeek = week + 1
+        } else {newDay = day +1}
+
+        db.update("Plan", "status" to "next")
+            .whereArgs("(week = {weekN}) and (day = {dayN})", "weekN" to newWeek,"dayN" to newDay)
+            .exec()
+    }
+
+    fun addAccomplishedWorkout(dayWorkoutComplete : DayWorkout) {
+        val db = this.writableDatabase
+        db.insert("Plan",
+            "planId" to dayWorkoutComplete.planId,
+            "startDate" to dayWorkoutComplete.startDate,
+            "week" to dayWorkoutComplete.week,
+            "day" to dayWorkoutComplete.day,
+            "status" to dayWorkoutComplete.status,
+            "setOne" to dayWorkoutComplete.workoutSets.setOne,
+            "setTwo" to dayWorkoutComplete.workoutSets.setTwo,
+            "setThree" to dayWorkoutComplete.workoutSets.setThree,
+            "setFour" to dayWorkoutComplete.workoutSets.setFour,
+            "setFive" to dayWorkoutComplete.workoutSets.setFive
+
+        )
+    }
 }
 

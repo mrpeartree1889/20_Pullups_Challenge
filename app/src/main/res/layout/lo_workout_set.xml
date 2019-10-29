@@ -98,7 +98,7 @@
                     android:text="@string/plan" />
 
                 <TextView
-                    android:id="@+id/setOnePlan"
+                    android:id="@+id/setOnePlanUnique"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

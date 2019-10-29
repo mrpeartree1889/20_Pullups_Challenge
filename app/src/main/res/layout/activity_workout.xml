@@ -116,6 +116,7 @@
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:onClick="cancelBtnClicked"
             android:text="@string/cancel_btn"
             android:textColor="@android:color/holo_red_light"
             android:textSize="12sp"
