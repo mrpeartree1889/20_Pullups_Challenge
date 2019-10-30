@@ -1,8 +1,6 @@
 package com.example.a20pullupschallenge.activities
 
-import android.app.ActivityOptions
 import android.content.Context
-import android.graphics.Path
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -10,11 +8,8 @@ import android.transition.*
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.a20pullupschallenge.DayWorkout
 import com.example.a20pullupschallenge.R
 import com.example.a20pullupschallenge.databases.MyDatabaseOpenHelper
@@ -58,25 +53,14 @@ class WorkoutActivity : AppCompatActivity() {
         weekText.text = getString(R.string.week_x_of_y, weekCurrent.toString(), dayWorkoutPlan.totNumWeeks.toString())
         dayText.text = getString(R.string.day_x_of_y, dayCurrent.toString(), "3")
 
-        // TODO clean this up
-
         // Set transition
-        var autoTrans : Transition = Slide(Gravity.BOTTOM)
-        autoTrans.duration = 1000
-//        autoTrans.startDelay = 200
+        var slideFromBottom : Transition = Slide(Gravity.BOTTOM)
+        slideFromBottom.duration = 1000
+        slideFromBottom.startDelay = 200
 
         // Layout manager
-        TransitionManager.go(welcomeScene)
+        TransitionManager.go(welcomeScene, slideFromBottom)
         populateWelcomeScene(setsPlanned)
-
-//        TODO clean this up
-        /// more animations
-        AnimationUtils.loadAnimation(this, R.anim.slide_test).also { slideAnimation ->
-            findViewById<ConstraintLayout>(R.id.frameLayout2).startAnimation(slideAnimation)
-        }
-        AnimationUtils.loadAnimation(this, R.anim.slide_in_up).also { slideAnimation ->
-            findViewById<ConstraintLayout>(R.id.linearLayout3).startAnimation(slideAnimation)
-        }
 
         // set var with name of active scene
         var activeScene = "welcome"
@@ -89,7 +73,8 @@ class WorkoutActivity : AppCompatActivity() {
         // and the action depending on the active state
         mainBtn.setOnClickListener {
             fun startPullupScene() {
-                TransitionManager.go(pullupScene, autoTrans)
+                TransitionManager.go(pullupScene, slideFromBottom)
+                keepTrackTableLo.visibility = View.VISIBLE
                 mainBtn.text = getString(R.string.done)
                 activeScene = "pullup"
 
@@ -121,11 +106,14 @@ class WorkoutActivity : AppCompatActivity() {
 
                 /// if we are on pullup scene, take us to rest, or if set is completed, take us to completion
                 "pullup" -> {
+
                     val viewEdit = findViewById<TextView>(R.id.achievedPullupsNumber)
                     setsAchieved[currentSetNumber] = viewEdit.text.toString().toInt()
 
                     if(currentSetNumber == 5) {
-                        TransitionManager.go(completeScene, autoTrans)
+                        TransitionManager.go(completeScene, slideFromBottom)
+                        keepTrackTableLo.visibility = View.GONE
+
                         currentSetNumber = 6
                         populateTable(setsPlanned, setsAchieved, currentSetNumber)
 
@@ -137,7 +125,7 @@ class WorkoutActivity : AppCompatActivity() {
                         activeScene = "complete"
 
                     } else {
-                        TransitionManager.go(restScene, autoTrans)
+                        TransitionManager.go(restScene, slideFromBottom)
 
                         // change text on button, on set number and populate table
                         mainBtn.text = getString(R.string.skip_rest)
@@ -162,11 +150,10 @@ class WorkoutActivity : AppCompatActivity() {
                                 timeText.text = (120 - i).toString()
                                 progressBar.progress = (120 - i)
                                 i++
-
                             }
 
                             override fun onFinish() {
-                                TransitionManager.go(pullupScene, autoTrans)
+                                TransitionManager.go(pullupScene, slideFromBottom)
                                 mainBtn.text = getString(R.string.done)
                                 activeScene = "pullup"
 
@@ -190,7 +177,13 @@ class WorkoutActivity : AppCompatActivity() {
 
                 "complete" -> {
                     updateDatabase(dayWorkoutPlan, setsAchieved)
-                    startActivity<MainActivity>()
+
+                    if ((weekCurrent == 3 && dayCurrent == 3) || (weekCurrent == 6 && dayCurrent == 3)) {
+                        startActivity<MidTestActivity>()
+                    } else {
+                        startActivity<MainActivity>()
+                    }
+
                 }
             }
         }

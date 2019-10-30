@@ -2,7 +2,6 @@ package com.example.a20pullupschallenge.databases
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import android.util.Log
 import com.example.a20pullupschallenge.DayWorkout
 import com.example.a20pullupschallenge.Sets
 import org.jetbrains.anko.db.*
@@ -31,14 +30,13 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
     }
 
     fun populatePlan (numInitialPullups: Int) {
-
         // get today's date
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
         val currentDate = current.format(formatter)
 
         // initialize DayWorkout class
-        val dayWorkout : DayWorkout = DayWorkout()
+        val dayWorkout = DayWorkout()
 
         // open DB
         val db = this.writableDatabase
@@ -59,9 +57,9 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
         }
 
         // WORKOUT PLANS
-        when {
+        when (numInitialPullups) {
             // BASIC PLANS (3 TO 5 PULLUPS)
-            numInitialPullups in 2..6 -> {
+            in 2..6 -> {
                 dayWorkout.planId = "bas_${numInitialPullups}_${currentDate}"
                 dayWorkout.startDate = currentDate
                 dayWorkout.totNumWeeks = 6
@@ -69,41 +67,14 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
 
                 for (week in 1..dayWorkout.totNumWeeks) {
                     for (day in 1..3) {
-                        if (week == 1 && day == 1) {dayWorkout.status = "next"} else {dayWorkout.status = "plan"}
-                        dayWorkout.week = week
-                        dayWorkout.day = day
-                        when {
-                            week == 1 && day == 1-> { dayWorkout.workoutSets = Sets(2,1,1,2,3) }
-                            week == 1 && day == 2-> {dayWorkout.workoutSets = Sets(2,2,1,2,3)}
-                            week == 1 && day == 3-> {dayWorkout.workoutSets = Sets(2,2,2,2,20) }
-
-                            week == 2 && day == 1-> {dayWorkout.workoutSets = Sets(3,2,3,2,3)}
-                            week == 2 && day == 2-> {dayWorkout.workoutSets = Sets(3,3,2,3,3)}
-                            week == 2 && day == 3-> {dayWorkout.workoutSets = Sets(3,3,3,2,20)}
-
-                            week == 3 && day == 1-> {dayWorkout.workoutSets = Sets(4,3,4,3,4)}
-                            week == 3 && day == 2-> {dayWorkout.workoutSets = Sets(5,3,4,3, 5)}
-                            week == 3 && day == 3-> {dayWorkout.workoutSets = Sets(6,5,4,3,20)}
-
-                            week == 4 && day == 1-> {dayWorkout.workoutSets = Sets(5,4,5,6,7)}
-                            week == 4 && day == 2-> {dayWorkout.workoutSets = Sets(7,6,5,6, 7)}
-                            week == 4 && day == 3-> {dayWorkout.workoutSets = Sets(8,6,5,4,20)}
-
-                            week == 5 && day == 1-> {dayWorkout.workoutSets = Sets(4,5,6,6,7)}
-                            week == 5 && day == 2-> {dayWorkout.workoutSets = Sets(8,7,8, 7, 8)}
-                            week == 5 && day == 3-> {dayWorkout.workoutSets = Sets(5,6,8,9,10)}
-
-                            week == 6 && day == 1-> {dayWorkout.workoutSets = Sets(5,6,7,8,9)}
-                            week == 6 && day == 2-> {dayWorkout.workoutSets = Sets(8,9,10, 11, 12)}
-                            week == 6 && day == 3-> {dayWorkout.workoutSets = Sets(13,11,9,7,20)}
-                        }
-                        addWorkoutToDB(dayWorkout)
+                        val newDayWorkout = getBasicPlan(dayWorkout, week, day)
+                        addWorkoutToDB(newDayWorkout)
                     }
                 }
             }
 
             // INTERMEDIATE PLANS (6 TO 9 PULLUPS)
-            numInitialPullups in 5..10 -> {
+            in 5..10 -> {
                 dayWorkout.planId = "int_${numInitialPullups}_${currentDate}"
                 dayWorkout.startDate = currentDate
                 dayWorkout.totNumWeeks = 6
@@ -111,41 +82,14 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
 
                 for (week in 1..dayWorkout.totNumWeeks) {
                     for (day in 1..3) {
-                        if (week == 1 && day == 1) {dayWorkout.status = "next"} else {dayWorkout.status = "plan"}
-                        dayWorkout.week = week
-                        dayWorkout.day = day
-                        when {
-                            week == 1 && day == 1-> { dayWorkout.workoutSets = Sets(4,3,2,4,5) }
-                            week == 1 && day == 2-> {dayWorkout.workoutSets = Sets(4,3,3,4,5)}
-                            week == 1 && day == 3-> {dayWorkout.workoutSets = Sets(4,4,4,3,20) }
-
-                            week == 2 && day == 1-> {dayWorkout.workoutSets = Sets(5,4,3,4,5)}
-                            week == 2 && day == 2-> {dayWorkout.workoutSets = Sets(4,4,3,4,6)}
-                            week == 2 && day == 3-> {dayWorkout.workoutSets = Sets(4,4,4,4,20)}
-
-                            week == 3 && day == 1-> {dayWorkout.workoutSets = Sets(6,5,4,5,6)}
-                            week == 3 && day == 2-> {dayWorkout.workoutSets = Sets(6,5,6,5, 6)}
-                            week == 3 && day == 3-> {dayWorkout.workoutSets = Sets(7,6,5,4,20)}
-
-                            week == 4 && day == 1-> {dayWorkout.workoutSets = Sets(5,6,7,8,9)}
-                            week == 4 && day == 2-> {dayWorkout.workoutSets = Sets(7,6,7,8, 9)}
-                            week == 4 && day == 3-> {dayWorkout.workoutSets = Sets(10,8,7,6,20)}
-
-                            week == 5 && day == 1-> {dayWorkout.workoutSets = Sets(5,6,7,8,9)}
-                            week == 5 && day == 2-> {dayWorkout.workoutSets = Sets(10,8,10, 8, 10)}
-                            week == 5 && day == 3-> {dayWorkout.workoutSets = Sets(7,8,9,11,12)}
-
-                            week == 6 && day == 1-> {dayWorkout.workoutSets = Sets(6,7,8,9,11)}
-                            week == 6 && day == 2-> {dayWorkout.workoutSets = Sets(10,11,12, 13, 14)}
-                            week == 6 && day == 3-> {dayWorkout.workoutSets = Sets(14,12,11,9,20)}
-                        }
-                        addWorkoutToDB(dayWorkout)
+                        val newDayWorkout = getIntermediatePlan(dayWorkout, week, day)
+                        addWorkoutToDB(newDayWorkout)
                     }
                 }
             }
 
             // ADVANCED PLANS (10+ PULLUPS)
-            numInitialPullups in 9..25 -> {
+            in 9..25 -> {
                 dayWorkout.planId = "adv_${numInitialPullups}_${currentDate}"
                 dayWorkout.startDate = currentDate
                 dayWorkout.totNumWeeks = 6
@@ -153,35 +97,8 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
 
                 for (week in 1..dayWorkout.totNumWeeks) {
                     for (day in 1..3) {
-                        if (week == 1 && day == 1) {dayWorkout.status = "next"} else {dayWorkout.status = "plan"}
-                        dayWorkout.week = week
-                        dayWorkout.day = day
-                        when {
-                            week == 1 && day == 1-> { dayWorkout.workoutSets = Sets(6,6,4,7,9) }
-                            week == 1 && day == 2-> {dayWorkout.workoutSets = Sets(7,6,6,8,9)}
-                            week == 1 && day == 3-> {dayWorkout.workoutSets = Sets(8,8,8,6,20) }
-
-                            week == 2 && day == 1-> {dayWorkout.workoutSets = Sets(8,7,6,7,8)}
-                            week == 2 && day == 2-> {dayWorkout.workoutSets = Sets(8,7,7,6,10)}
-                            week == 2 && day == 3-> {dayWorkout.workoutSets = Sets(8,8,7,7,20)}
-
-                            week == 3 && day == 1-> {dayWorkout.workoutSets = Sets(9,7,6,7,9)}
-                            week == 3 && day == 2-> {dayWorkout.workoutSets = Sets(9,7,8,7, 9)}
-                            week == 3 && day == 3-> {dayWorkout.workoutSets = Sets(10,8,6,7,20)}
-
-                            week == 4 && day == 1-> {dayWorkout.workoutSets = Sets(6,7,8,9,11)}
-                            week == 4 && day == 2-> {dayWorkout.workoutSets = Sets(7,8,9,10, 11)}
-                            week == 4 && day == 3-> {dayWorkout.workoutSets = Sets(12,10,8,7,20)}
-
-                            week == 5 && day == 1-> {dayWorkout.workoutSets = Sets(6,7,8,9,11)}
-                            week == 5 && day == 2-> {dayWorkout.workoutSets = Sets(12,10,12, 10, 12)}
-                            week == 5 && day == 3-> {dayWorkout.workoutSets = Sets(10,11,12,13,15)}
-
-                            week == 6 && day == 1-> {dayWorkout.workoutSets = Sets(7,8,9,10,12)}
-                            week == 6 && day == 2-> {dayWorkout.workoutSets = Sets(11,12,13, 14, 15)}
-                            week == 6 && day == 3-> {dayWorkout.workoutSets = Sets(15,1311,12,10, 20)}
-                        }
-                        addWorkoutToDB(dayWorkout)
+                        val newDayWorkout = getAdvancedPlan(dayWorkout, week, day)
+                        addWorkoutToDB(newDayWorkout)
                     }
                 }
             }
@@ -189,6 +106,109 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
 
         db.close()
     }
+
+    private fun getBasicPlan(dayWorkout: DayWorkout, week : Int, day : Int) : DayWorkout {
+        if (week == 1 && day == 1) {dayWorkout.status = "next"} else {dayWorkout.status = "plan"}
+        dayWorkout.week = week
+        dayWorkout.day = day
+
+        when {
+            week == 1 && day == 1-> {dayWorkout.workoutSets = Sets(2,1,1,2,3) }
+            week == 1 && day == 2-> {dayWorkout.workoutSets = Sets(2,2,1,2,3)}
+            week == 1 && day == 3-> {dayWorkout.workoutSets = Sets(2,2,2,2,20) }
+
+            week == 2 && day == 1-> {dayWorkout.workoutSets = Sets(3,2,3,2,3)}
+            week == 2 && day == 2-> {dayWorkout.workoutSets = Sets(3,3,2,3,3)}
+            week == 2 && day == 3-> {dayWorkout.workoutSets = Sets(3,3,3,2,20)}
+
+            week == 3 && day == 1-> {dayWorkout.workoutSets = Sets(4,3,4,3,4)}
+            week == 3 && day == 2-> {dayWorkout.workoutSets = Sets(5,3,4,3, 5)}
+            week == 3 && day == 3-> {dayWorkout.workoutSets = Sets(6,5,4,3,20)}
+
+            week == 4 && day == 1-> {dayWorkout.workoutSets = Sets(5,4,5,6,7)}
+            week == 4 && day == 2-> {dayWorkout.workoutSets = Sets(7,6,5,6, 7)}
+            week == 4 && day == 3-> {dayWorkout.workoutSets = Sets(8,6,5,4,20)}
+
+            week == 5 && day == 1-> {dayWorkout.workoutSets = Sets(4,5,6,6,7)}
+            week == 5 && day == 2-> {dayWorkout.workoutSets = Sets(8,7,8, 7, 8)}
+            week == 5 && day == 3-> {dayWorkout.workoutSets = Sets(5,6,8,9,10)}
+
+            week == 6 && day == 1-> {dayWorkout.workoutSets = Sets(5,6,7,8,9)}
+            week == 6 && day == 2-> {dayWorkout.workoutSets = Sets(8,9,10, 11, 12)}
+            week == 6 && day == 3-> {dayWorkout.workoutSets = Sets(13,11,9,7,20)}
+        }
+
+        return dayWorkout
+    }
+
+    private fun getIntermediatePlan(dayWorkout: DayWorkout, week : Int, day : Int) : DayWorkout {
+        if (week == 1 && day == 1) {dayWorkout.status = "next"} else {dayWorkout.status = "plan"}
+        dayWorkout.week = week
+        dayWorkout.day = day
+
+        when {
+            week == 1 && day == 1-> {dayWorkout.workoutSets = Sets(4,3,2,4,5) }
+            week == 1 && day == 2-> {dayWorkout.workoutSets = Sets(4,3,3,4,5)}
+            week == 1 && day == 3-> {dayWorkout.workoutSets = Sets(4,4,4,3,20) }
+
+            week == 2 && day == 1-> {dayWorkout.workoutSets = Sets(5,4,3,4,5)}
+            week == 2 && day == 2-> {dayWorkout.workoutSets = Sets(4,4,3,4,6)}
+            week == 2 && day == 3-> {dayWorkout.workoutSets = Sets(4,4,4,4,20)}
+
+            week == 3 && day == 1-> {dayWorkout.workoutSets = Sets(6,5,4,5,6)}
+            week == 3 && day == 2-> {dayWorkout.workoutSets = Sets(6,5,6,5, 6)}
+            week == 3 && day == 3-> {dayWorkout.workoutSets = Sets(7,6,5,4,20)}
+
+            week == 4 && day == 1-> {dayWorkout.workoutSets = Sets(5,6,7,8,9)}
+            week == 4 && day == 2-> {dayWorkout.workoutSets = Sets(7,6,7,8, 9)}
+            week == 4 && day == 3-> {dayWorkout.workoutSets = Sets(10,8,7,6,20)}
+
+            week == 5 && day == 1-> {dayWorkout.workoutSets = Sets(5,6,7,8,9)}
+            week == 5 && day == 2-> {dayWorkout.workoutSets = Sets(10,8,10, 8, 10)}
+            week == 5 && day == 3-> {dayWorkout.workoutSets = Sets(7,8,9,11,12)}
+
+            week == 6 && day == 1-> {dayWorkout.workoutSets = Sets(6,7,8,9,11)}
+            week == 6 && day == 2-> {dayWorkout.workoutSets = Sets(10,11,12, 13, 14)}
+            week == 6 && day == 3-> {dayWorkout.workoutSets = Sets(14,12,11,9,20)}
+        }
+
+        return dayWorkout
+    }
+
+    private fun getAdvancedPlan(dayWorkout: DayWorkout, week : Int, day : Int) : DayWorkout {
+        if (week == 1 && day == 1) {dayWorkout.status = "next"} else {dayWorkout.status = "plan"}
+        dayWorkout.week = week
+        dayWorkout.day = day
+
+        when {
+            week == 1 && day == 1-> { dayWorkout.workoutSets = Sets(6,6,4,7,9) }
+            week == 1 && day == 2-> {dayWorkout.workoutSets = Sets(7,6,6,8,9)}
+            week == 1 && day == 3-> {dayWorkout.workoutSets = Sets(8,8,8,6,20) }
+
+            week == 2 && day == 1-> {dayWorkout.workoutSets = Sets(8,7,6,7,8)}
+            week == 2 && day == 2-> {dayWorkout.workoutSets = Sets(8,7,7,6,10)}
+            week == 2 && day == 3-> {dayWorkout.workoutSets = Sets(8,8,7,7,20)}
+
+            week == 3 && day == 1-> {dayWorkout.workoutSets = Sets(9,7,6,7,9)}
+            week == 3 && day == 2-> {dayWorkout.workoutSets = Sets(9,7,8,7, 9)}
+            week == 3 && day == 3-> {dayWorkout.workoutSets = Sets(10,8,6,7,20)}
+
+            week == 4 && day == 1-> {dayWorkout.workoutSets = Sets(6,7,8,9,11)}
+            week == 4 && day == 2-> {dayWorkout.workoutSets = Sets(7,8,9,10, 11)}
+            week == 4 && day == 3-> {dayWorkout.workoutSets = Sets(12,10,8,7,20)}
+
+            week == 5 && day == 1-> {dayWorkout.workoutSets = Sets(6,7,8,9,11)}
+            week == 5 && day == 2-> {dayWorkout.workoutSets = Sets(12,10,12, 10, 12)}
+            week == 5 && day == 3-> {dayWorkout.workoutSets = Sets(10,11,12,13,15)}
+
+            week == 6 && day == 1-> {dayWorkout.workoutSets = Sets(7,8,9,10,12)}
+            week == 6 && day == 2-> {dayWorkout.workoutSets = Sets(11,12,13, 14, 15)}
+            week == 6 && day == 3-> {dayWorkout.workoutSets = Sets(15,13,12,10, 20)}
+        }
+
+        return dayWorkout
+    }
+
 
     /// this function returns the full plan based on the answer given on the beginning
     fun getPlan() : ArrayList<DayWorkout> {
@@ -273,7 +293,7 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
     }
 
     // used more than once, dont delete
-    fun createTable(db: SQLiteDatabase) {
+    private fun createTable(db: SQLiteDatabase) {
         db.createTable("Plan", true,
             "planId" to TEXT,
             "startDate" to TEXT,
@@ -296,7 +316,6 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
                 week = this.getInt(this.getColumnIndex("week"))
             }
         }
-
         return week > 0
     }
 
@@ -333,8 +352,88 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
             "setThree" to dayWorkoutComplete.workoutSets.setThree,
             "setFour" to dayWorkoutComplete.workoutSets.setFour,
             "setFive" to dayWorkoutComplete.workoutSets.setFive
-
         )
+    }
+
+    fun updatePlan(numIntermediatePullups: Int) {
+        // get today's date
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+        val currentDate = current.format(formatter)
+
+        // initialize DayWorkout class
+        val dayWorkout = DayWorkout()
+
+        // open DB
+        val db = this.writableDatabase
+
+        // function to update plan
+        fun updateWorkout (dayWorkout: DayWorkout) {
+            db.update("Plan",
+                "startDate" to currentDate,
+                    "status" to dayWorkout.status,
+                    "setOne" to dayWorkout.workoutSets.setOne,
+                    "setTwo" to dayWorkout.workoutSets.setTwo,
+                    "setThree" to dayWorkout.workoutSets.setThree,
+                    "setFour" to dayWorkout.workoutSets.setFour,
+                    "setFive" to dayWorkout.workoutSets.setFive
+            ).whereArgs("(week = {weekN}) and (day = {dayN})", "weekN" to dayWorkout.week,"dayN" to dayWorkout.day).exec()
+        }
+
+        when (numIntermediatePullups) {
+            /// BASIC PLAN
+            in 9..11 -> {
+                for (week in 4..6) {
+                    dayWorkout.planId = "bas_int_${numIntermediatePullups}_${currentDate}"
+                    dayWorkout.startDate = currentDate
+                    dayWorkout.totNumWeeks = 6
+                    dayWorkout.status = "plan"
+
+
+                    for (day in 1..3) {
+                        val newDayWorkout = getBasicPlan(dayWorkout, week, day)
+                        if (week == 4 && day == 1) { newDayWorkout.status = "next" }
+                        updateWorkout(newDayWorkout)
+                    }
+                }
+            }
+
+            /// INTERMEDIATE PLAN
+            in 12..14 -> {
+                for (week in 4..6) {
+                    dayWorkout.planId = "int_int_${numIntermediatePullups}_${currentDate}"
+                    dayWorkout.startDate = currentDate
+                    dayWorkout.totNumWeeks = 6
+                    dayWorkout.status = "plan"
+
+                    for (day in 1..3) {
+                        val newDayWorkout = getIntermediatePlan(dayWorkout, week, day)
+                        if (week == 4 && day == 1) {
+                            newDayWorkout.status = "next"
+                        }
+                        updateWorkout(newDayWorkout)
+                    }
+                }
+            }
+
+            /// ADVANCED PLAN
+            in 14..21 -> {
+                for (week in 4..6) {
+                    dayWorkout.planId = "adv_int_${numIntermediatePullups}_${currentDate}"
+                    dayWorkout.startDate = currentDate
+                    dayWorkout.totNumWeeks = 6
+                    dayWorkout.status = "plan"
+
+                    for (day in 1..3) {
+                        val newDayWorkout = getAdvancedPlan(dayWorkout, week, day)
+                        if (week == 4 && day == 1) {
+                            newDayWorkout.status = "next"
+                        }
+                        updateWorkout(newDayWorkout)
+                    }
+                }
+            }
+        }
     }
 }
 

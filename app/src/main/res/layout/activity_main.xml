@@ -8,6 +8,17 @@
     tools:context=".activities.MainActivity">
 
 
+    <Button
+        android:id="@+id/testBtn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:onClick="testBtnClicked"
+        android:text="TEST BUTTON"
+        app:layout_constraintBottom_toTopOf="@+id/workoutPlanLayout"
+        app:layout_constraintEnd_toEndOf="@+id/topBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/topBar" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"

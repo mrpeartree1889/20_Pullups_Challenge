@@ -96,5 +96,16 @@
     <string name="week_adapter">W%1$s</string>
     <string name="day_adapter">Day %1$i</string>
 
-
+    // Test activity
+    <string name="test_main_text_placedholder">You\'ve completed x weeks of the plan, congratulations! Now it\'s time to test your maximum.</string>
+    <string name="test_main_text">You\'ve completed %s weeks of the plan, congratulations! Now it\'s time to test your maximum.</string>
+    <string name="test_rest">Take two days off, get plenty of rest, eat and drink right. Now you should be able to do at least 9 pullups.</string>
+    <string name="start_test">Start test</string>
+    <string name="test_time">Test time</string>
+    <string name="clipboard_image_descript">Clipboard image</string>
+    <string name="pullup_question">How many pullups can you do in a row now?</string>
+    <string name="congratulation">Congratulations!</string>
+    <string name="congratulation_text">You did a great job these past 3 weeks! You are ready to continue to the next 3 weeks. You are on track to achieve 20 pullups by the end of the program.</string>
+    <string name="good_job_test">Good job</string>
+    <string name="good_job_test_text">You did a good job these past 3 weeks but by now you should have been able to do 9 pullups. Not to worry, with a little bit of more hard work you will get there. Just repeat this past week, and retry the test.</string>
 </resources>

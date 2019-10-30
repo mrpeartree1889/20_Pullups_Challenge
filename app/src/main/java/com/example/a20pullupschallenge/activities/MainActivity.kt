@@ -2,7 +2,6 @@ package com.example.a20pullupschallenge.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.content.Intent
 import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -81,7 +80,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun createNewPlanBtnClicked (view: View){
-        alert("If you continue, you will delete your current progress. Are you sure you want to proceed?", "Attention") {
+        alert() {
+            title = "Attention"
+            message = "If you continue, you will delete your current progress. Are you sure you want to proceed?"
             positiveButton("Yes, proceed") {
                 planDatabase.dropTable()
                 startActivity<CreatePlan>()
@@ -93,7 +94,7 @@ class MainActivity : AppCompatActivity() {
 
     fun disclaimerBtnClicked(view: View) {
         alert {
-            title = "test"
+            title = "Disclaimer"
             message = "asdiasoidhauhfashdlajsldkj"
             positiveButton("Ok") {}
         }.show()
@@ -112,5 +113,9 @@ class MainActivity : AppCompatActivity() {
         val rv : RecyclerView = findViewById(R.id.rvList)
         rv.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL,false)
         rv.adapter = adapter
+    }
+
+    fun testBtnClicked(view : View) {
+        startActivity<MidTestActivity>("week" to 3)
     }
 }

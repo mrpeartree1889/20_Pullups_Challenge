@@ -69,18 +69,215 @@
         app:layout_constraintTop_toBottomOf="@+id/topBar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fragLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/keepTrackTableLo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weekText">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="7">
+
+                <TextView
+                    android:id="@+id/setTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/left_border_gray"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="0dp"
+                    android:text="@string/set" />
+
+                <TextView
+                    android:id="@+id/setOneTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/left_border_gray"
+                    android:text="@string/one"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/setTwoTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/left_border_gray"
+                    android:text="@string/two"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/setThreeTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/left_border_gray"
+                    android:text="@string/three"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/setFourTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/left_border_gray"
+                    android:text="@string/four"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/setFiveTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/left_border_gray"
+                    android:text="@string/five"
+                    android:textAlignment="center" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="7">
+
+                <TextView
+                    android:id="@+id/planTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="0dp"
+                    android:text="@string/plan" />
+
+                <TextView
+                    android:id="@+id/setOnePlanUnique"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dash"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/setTwoPlan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dash"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/setThreePlan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dash"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/setFourPlan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dash"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/setFivePlan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dash"
+                    android:textAlignment="center" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="7">
+
+                <TextView
+                    android:id="@+id/achievedTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="0dp"
+                    android:text="@string/achieved" />
+
+                <TextView
+                    android:id="@+id/setOneAchieved"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dash"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/setTwoAchieved"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dash"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/setThreeAchieved"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dash"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/setFourAchieved"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dash"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/setFiveAchieved"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dash"
+                    android:textAlignment="center" />
+            </TableRow>
+
+        </TableLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weekText">
+        app:layout_constraintTop_toBottomOf="@+id/keepTrackTableLo">
 
         <include layout="@layout/lo_workout_welcome" />
 

@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_twenty_pushups_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.WorkoutActivity"></activity>
+        <activity android:name=".activities.MidTestActivity"></activity>
+        <activity android:name=".activities.WorkoutActivity" />
         <activity android:name=".activities.CreatePlan" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
