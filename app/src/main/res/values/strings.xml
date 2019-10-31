@@ -16,7 +16,7 @@
     <string name="workout_complete_great">Great!</string>
     /// Workout activity layout
     <string name="week_x_of_y_placeholder">Week x of y</string>
-    <string name="week_x_of_y">Week %1$s of %2$s</string>
+    <string name="week_x">Week %1$s</string>
     <string name="day_x_of_y_placeholder">Day x of y</string>
     <string name="day_x_of_y">Day %1$s of %2$s</string>
     <string name="start_workout_btn">Start workout</string>

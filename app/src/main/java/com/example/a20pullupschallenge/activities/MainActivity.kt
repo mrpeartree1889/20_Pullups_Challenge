@@ -2,6 +2,7 @@ package com.example.a20pullupschallenge.activities
 
 import android.os.Bundle
 import android.content.Context
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,24 +35,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Checks if new workout is needed
-        if(!planDatabase.checkTable()) {
+        val databaseExists = planDatabase.checkTable()
+        if(!databaseExists) { // if database doesnt exist set layout to create a new one
             createWorkoutLayout.visibility = View.VISIBLE
             workoutPlanLayout.visibility = View.GONE
             btnMakePlan.setOnClickListener() {
                 startActivity<CreatePlan>()
             }
-        } else if (planDatabase.checkTable()) {
+        } else if (databaseExists) { // if database exists set layout to show it
             createWorkoutLayout.visibility = View.GONE
             workoutPlanLayout.visibility = View.VISIBLE
 
             val nextWeekAndDay = nextWeekAndDay()
-            if(nextWeekAndDay[0] == 4 && nextWeekAndDay[1] == 1) {
+            if(nextWeekAndDay[0] == 0 && nextWeekAndDay[1] == 0) { // this checks if the next step is do the test
                 startWorkoutBtn.text = "Take test"
                 viewPlan()
             } else {
                 viewPlan()
             }
-
         }
     }
 
@@ -96,7 +97,6 @@ class MainActivity : AppCompatActivity() {
             }
             negativeButton("No, go back") {}
         }.show()
-
     }
 
     fun disclaimerBtnClicked(view: View) {
@@ -107,12 +107,12 @@ class MainActivity : AppCompatActivity() {
         }.show()
     }
 
-    fun startWorkoutBtnClicked(view:View) {
+    fun startWorkoutBtnClicked(view : View) {
         val weekAndDay = nextWeekAndDay()
         val nextWeek = weekAndDay[0]
         val nextDay = weekAndDay[1]
 
-        if(nextWeek == 4 && nextDay == 1) {
+        if(nextWeek == 0 && nextDay == 0) {
             startActivity<MidTestActivity>("week" to nextWeek, "day" to nextDay)
         } else {
             startActivity<WorkoutActivity>("week" to nextWeek, "day" to nextDay)
@@ -133,6 +133,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun testBtnClicked(view : View) {
-        startActivity<EndTestActivity>("week" to 6)
+        startActivity<MidTestActivity>("week" to 3)
     }
 }

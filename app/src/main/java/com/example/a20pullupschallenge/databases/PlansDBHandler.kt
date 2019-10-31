@@ -2,6 +2,7 @@ package com.example.a20pullupschallenge.databases
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import android.util.Log
 import com.example.a20pullupschallenge.DayWorkout
 import com.example.a20pullupschallenge.Sets
 import org.jetbrains.anko.db.*
@@ -241,6 +242,9 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
     /// this function returns the week and day number of the next workout
     fun getNextWorkoutWeekAndDay() : ArrayList<Int> {
         val weekAndDay = ArrayList<Int>()
+        weekAndDay.add(0) // value for week
+        weekAndDay.add(0) // value for day
+        Log.d("errorFinding","getNextWorkoutWeekAndDay")
         val db = this.readableDatabase
         db.select("Plan", "week", "day", "status")
             .whereArgs("status = {statusVar}", "statusVar" to "next")
@@ -248,13 +252,14 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
             if (this.count != 0) {
                 while (this.moveToNext()) {
                     if (this.getString(this.getColumnIndex("status")) == "next") {
-                        weekAndDay.add(this.getInt(this.getColumnIndex("week")))
-                        weekAndDay.add(this.getInt(this.getColumnIndex("day")))
+                        weekAndDay[0] = this.getInt(this.getColumnIndex("week"))
+                        weekAndDay[1] = this.getInt(this.getColumnIndex("day"))
                     }
                 }
                 this.close()
             }
         }
+        Log.d("errorFinding","db query run, weekAndDay are ${weekAndDay[0]} and ${weekAndDay[1]}")
         db.close()
         return weekAndDay
     }
@@ -320,13 +325,26 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
     fun changeStatus(week: Int, day: Int) {
         val db = this.writableDatabase
         // update finished workout to show planDone
+        changeStatusOfPlanned(week, day)
+
+        // update next workout to show next
+        changeStatusToNext(week, day)
+    }
+
+    fun changeStatusOfPlanned(week: Int, day: Int) {
+        val db = this.writableDatabase
+        // update finished workout to show planDone
         db.update("Plan", "status" to "planDone")
             .whereArgs("(week = {weekN}) and (day = {dayN})", "weekN" to week,"dayN" to day)
             .exec()
+    }
 
+    fun changeStatusToNext(week: Int, day: Int) {
+        val db = this.writableDatabase
         // update next workout to show next
         var newDay = day
         var newWeek = week
+
         if(day == 3) {
             newDay = 1
             newWeek = week + 1
@@ -442,20 +460,27 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
         fun deleteAccompAndUpdatePlan (week: Int) {
             db.delete("Plan",
                 "(week = {weekN}) and (status = {statusN})",
-                "weekN" to week, "statusN" to "accomp"
-            )
+                "weekN" to week, "statusN" to "accomp")
 
             // update plans to repeat to from planDone to plan
             db.update("Plan", "status" to "plan")
                 .whereArgs("(week = {weekN}) and (status = {statusN})", "weekN" to week,"statusN" to "planDone")
                 .exec()
+
+            // update current week and day 1 to show "next"
+            db.update("Plan", "status" to "next")
+                .whereArgs("(week = {weekN}) and (day = {dayN})", "weekN" to week,"dayN" to 1)
+                .exec()
+
+            // update current next week and day 1 to show "plan"
+            db.update("Plan", "status" to "plan")
+                .whereArgs("(week = {weekN}) and (day = {dayN})", "weekN" to (week+1),"dayN" to 1)
+                .exec()
         }
 
         for (i in (completedWeek - repeatWeeksQt + 1)..completedWeek) {
-            deleteAccompAndUpdatePlan(i)
+            deleteAccompAndUpdatePlan(i-1)
         }
-
-
     }
 }
 

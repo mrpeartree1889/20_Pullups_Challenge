@@ -107,7 +107,7 @@
                     android:text="@string/plan" />
 
                 <TextView
-                    android:id="@+id/setOnePlanUnique"
+                    android:id="@+id/setOnePlanComplete"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -115,7 +115,7 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/setTwoPlan"
+                    android:id="@+id/setTwoPlanComplete"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -123,7 +123,7 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/setThreePlan"
+                    android:id="@+id/setThreePlanComplete"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -131,7 +131,7 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/setFourPlan"
+                    android:id="@+id/setFourPlanComplete"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -139,7 +139,7 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/setFivePlan"
+                    android:id="@+id/setFivePlanComplete"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -162,7 +162,7 @@
                     android:text="@string/achieved" />
 
                 <TextView
-                    android:id="@+id/setOneAchieved"
+                    android:id="@+id/setOneAchievedComplete"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -170,7 +170,7 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/setTwoAchieved"
+                    android:id="@+id/setTwoAchievedComplete"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -178,7 +178,7 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/setThreeAchieved"
+                    android:id="@+id/setThreeAchievedComplete"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -186,7 +186,7 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/setFourAchieved"
+                    android:id="@+id/setFourAchievedComplete"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -194,7 +194,7 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/setFiveAchieved"
+                    android:id="@+id/setFiveAchievedComplete"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

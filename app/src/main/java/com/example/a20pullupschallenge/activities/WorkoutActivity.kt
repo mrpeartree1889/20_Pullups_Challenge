@@ -55,11 +55,7 @@ class WorkoutActivity : AppCompatActivity() {
             Scene.getSceneForLayout(sceneRoot, R.layout.lo_workout_complete, this)
 
         // Update values of main layout
-        weekText.text = getString(
-            R.string.week_x_of_y,
-            weekCurrent.toString(),
-            dayWorkoutPlan.totNumWeeks.toString()
-        )
+        weekText.text = getString(R.string.week_x, weekCurrent.toString())
         dayText.text = getString(R.string.day_x_of_y, dayCurrent.toString(), "3")
 
         // Set transition
@@ -117,7 +113,6 @@ class WorkoutActivity : AppCompatActivity() {
 
                 /// if we are on pullup scene, take us to rest, or if set is completed, take us to completion
                 "pullup" -> {
-
                     val viewEdit = findViewById<TextView>(R.id.achievedPullupsNumber)
                     setsAchieved[currentSetNumber] = viewEdit.text.toString().toInt()
 
@@ -125,8 +120,8 @@ class WorkoutActivity : AppCompatActivity() {
                         TransitionManager.go(completeScene, slideFromBottom)
                         keepTrackTableLo.visibility = View.GONE
 
-                        currentSetNumber = 6
-                        populateTable(setsPlanned, setsAchieved, currentSetNumber)
+//                        currentSetNumber = 6
+                        populateCompleteWorkoutTable(setsPlanned, setsAchieved)
 
                         val completedPullups = setsAchieved.sum() - setsAchieved[0]
                         val completePullupsText: TextView = findViewById(R.id.textView16)
@@ -309,6 +304,62 @@ class WorkoutActivity : AppCompatActivity() {
         }
     }
 
+    private fun populateCompleteWorkoutTable(
+        setsPlanned: ArrayList<Int>,
+        setsAchieved: ArrayList<Int>) {
+
+        /// populate values
+        val setOnePlanned: TextView = findViewById(R.id.setOnePlanComplete)
+        val setTwoPlanned: TextView = findViewById(R.id.setTwoPlanComplete)
+        val setThreePlanned: TextView = findViewById(R.id.setThreePlanComplete)
+        val setFourPlanned: TextView = findViewById(R.id.setFourPlanComplete)
+        val setFivePlanned: TextView = findViewById(R.id.setFivePlanComplete)
+
+        val setOneAchieved: TextView = findViewById(R.id.setOneAchievedComplete)
+        val setTwoAchieved: TextView = findViewById(R.id.setTwoAchievedComplete)
+        val setThreeAchieved: TextView = findViewById(R.id.setThreeAchievedComplete)
+        val setFourAchieved: TextView = findViewById(R.id.setFourAchievedComplete)
+        val setFiveAchieved: TextView = findViewById(R.id.setFiveAchievedComplete)
+
+        setOnePlanned.text = getNumber(setsPlanned[1])
+        setTwoPlanned.text = getNumber(setsPlanned[2])
+        setThreePlanned.text = getNumber(setsPlanned[3])
+        setFourPlanned.text = getNumber(setsPlanned[4])
+        setFivePlanned.text = getNumber(setsPlanned[5])
+
+        setOneAchieved.text = setsAchieved[1].toString()
+        setTwoAchieved.text = setsAchieved[2].toString()
+        setThreeAchieved.text = setsAchieved[3].toString()
+        setFourAchieved.text = setsAchieved[4].toString()
+        setFiveAchieved.text = setsAchieved[5].toString()
+
+        if (setsPlanned[1] <= setsAchieved[1]) {
+            setOneAchieved.setBackgroundResource(R.color.colorAppGreen)
+        } else if (setsPlanned[4] > setsAchieved[4]) {
+            setOneAchieved.setBackgroundResource(R.color.colorAppOrange)
+        }
+        if (setsPlanned[2] <= setsAchieved[2]) {
+            setTwoAchieved.setBackgroundResource(R.color.colorAppGreen)
+        } else if (setsPlanned[4] > setsAchieved[4]) {
+            setTwoAchieved.setBackgroundResource(R.color.colorAppOrange)
+        }
+        if (setsPlanned[3] <= setsAchieved[3]) {
+            setThreeAchieved.setBackgroundResource(R.color.colorAppGreen)
+        } else if (setsPlanned[4] > setsAchieved[4]) {
+            setThreeAchieved.setBackgroundResource(R.color.colorAppOrange)
+        }
+        if (setsPlanned[4] <= setsAchieved[4]) {
+            setFourAchieved.setBackgroundResource(R.color.colorAppGreen)
+        } else if (setsPlanned[4] > setsAchieved[4]) {
+            setFourAchieved.setBackgroundResource(R.color.colorAppOrange)
+        }
+        if (setsPlanned[5] <= setsAchieved[5]) {
+            setFiveAchieved.setBackgroundResource(R.color.colorAppGreen)
+        } else if (setsPlanned[4] > setsAchieved[4]) {
+            setFiveAchieved.setBackgroundResource(R.color.colorAppOrange)
+        }
+    }
+
     private fun plusBtnAction(achievedPullups: TextView) {
         val value = achievedPullups.text.toString()
         val currentNumber = Integer.parseInt((value))
@@ -341,8 +392,16 @@ class WorkoutActivity : AppCompatActivity() {
     }
 
     fun updateDatabase(dayWorkoutPlan: DayWorkout, setsAchieved: ArrayList<Int>) {
+        val week = dayWorkoutPlan.week
+        val day= dayWorkoutPlan.day
+
         // change status on planned workout
-        planDatabase.changeStatus(dayWorkoutPlan.week, dayWorkoutPlan.day)
+        if(week == 3 && day == 3) {
+            planDatabase.changeStatusOfPlanned(week,day)
+        } else {
+            planDatabase.changeStatus(week, day)
+        }
+
 
         // add accomplished workout
         val dayWorkoutCompleted = dayWorkoutPlan

@@ -17,7 +17,7 @@ class CreatePlan : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_plan)
 
-        var numberPicked = 0
+        var numberPicked = 3
         if (createPlanNumberPicker != null) {
             createPlanNumberPicker.minValue = 3
             createPlanNumberPicker.maxValue = 20
