@@ -7,11 +7,9 @@ import com.example.a20pullupschallenge.Sets
 import org.jetbrains.anko.db.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-// Todo clean all LOGS
+
 class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "PlansDatabase", null, 1) {
-    init {
-        instance = this
-    }
+    init { instance = this }
 
     companion object {
         private var instance: MyDatabaseOpenHelper? = null
@@ -434,6 +432,30 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) : ManagedSQLiteOpen
                 }
             }
         }
+    }
+
+    fun restartWeeks(completedWeek : Int, repeatWeeksQt : Int) {
+        // open DB
+        val db = this.writableDatabase
+
+        // fun to delete accomplished
+        fun deleteAccompAndUpdatePlan (week: Int) {
+            db.delete("Plan",
+                "(week = {weekN}) and (status = {statusN})",
+                "weekN" to week, "statusN" to "accomp"
+            )
+
+            // update plans to repeat to from planDone to plan
+            db.update("Plan", "status" to "plan")
+                .whereArgs("(week = {weekN}) and (status = {statusN})", "weekN" to week,"statusN" to "planDone")
+                .exec()
+        }
+
+        for (i in (completedWeek - repeatWeeksQt + 1)..completedWeek) {
+            deleteAccompAndUpdatePlan(i)
+        }
+
+
     }
 }
 

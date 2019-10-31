@@ -1,84 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dayWorkoutLo"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="1dp"
+    android:orientation="vertical"
     android:weightSum="7">
 
-    <TextView
-        android:id="@+id/weekText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary"
-        android:text="@string/week_number_placeholder"
-        android:textAlignment="center"
-        android:textColor="@color/colorTextWhite" />
+    <LinearLayout
+        android:id="@+id/weekLo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/dayText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_weight="1"
-        android:text="@string/day_number_placeholder"
-        android:textAlignment="center"
-        android:textColor="@color/colorTextPrimary" />
+        <TextView
+            android:id="@+id/weekText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="4dp"
+            android:text="@string/week_number_placeholder"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/setOne"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_weight="1"
-        android:background="#0D000000"
-        android:text="@string/zero_placeholder"
-        android:textAlignment="center"
-        android:textColor="@color/colorTextPrimary" />
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:alpha="0.5"
+            app:srcCompat="@color/colorPrimary" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/setTwo"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_weight="1"
-        android:background="#0D000000"
-        android:text="@string/zero_placeholder"
-        android:textAlignment="center"
-        android:textColor="@color/colorTextPrimary" />
+        android:layout_marginVertical="1dp"
+        android:orientation="horizontal"
+        android:weightSum="6">
 
-    <TextView
-        android:id="@+id/setThree"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_weight="1"
-        android:background="#0D000000"
-        android:text="@string/zero_placeholder"
-        android:textAlignment="center"
-        android:textColor="@color/colorTextPrimary" />
+        <TextView
+            android:id="@+id/dayText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="4dp"
+            android:text="@string/day_number_placeholder"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextPrimary" />
 
-    <TextView
-        android:id="@+id/setFour"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_weight="1"
-        android:background="#0D000000"
-        android:text="@string/zero_placeholder"
-        android:textAlignment="center"
-        android:textColor="@color/colorTextPrimary" />
+        <TextView
+            android:id="@+id/setOne"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:background="#0D000000"
+            android:text="@string/zero_placeholder"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextPrimary" />
 
-    <TextView
-        android:id="@+id/setFive"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_weight="1"
-        android:background="#0D000000"
-        android:text="@string/zero_placeholder"
-        android:textAlignment="center"
-        android:textColor="@color/colorTextPrimary" />
+        <TextView
+            android:id="@+id/setTwo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:background="#0D000000"
+            android:text="@string/zero_placeholder"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextPrimary" />
+
+        <TextView
+            android:id="@+id/setThree"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:background="#0D000000"
+            android:text="@string/zero_placeholder"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextPrimary" />
+
+        <TextView
+            android:id="@+id/setFour"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:background="#0D000000"
+            android:text="@string/zero_placeholder"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextPrimary" />
+
+        <TextView
+            android:id="@+id/setFive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:background="#0D000000"
+            android:text="@string/zero_placeholder"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextPrimary" />
+    </LinearLayout>
+
 
 </LinearLayout>

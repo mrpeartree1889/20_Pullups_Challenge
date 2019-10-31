@@ -4,7 +4,7 @@
 
 
     /// Layout day workout
-    <string name="week_number">Week %1$i</string>
+    <string name="week_number">Week %s</string>
     <string name="week_number_placeholder">Week x</string>
     <string name="day_number_placeholder">Day x</string>
     <string name="day_number">Day %1$i</string>
@@ -108,4 +108,20 @@
     <string name="congratulation_text">You did a great job these past 3 weeks! You are ready to continue to the next 3 weeks. You are on track to achieve 20 pullups by the end of the program.</string>
     <string name="good_job_test">Good job</string>
     <string name="good_job_test_text">You did a good job these past 3 weeks but by now you should have been able to do 9 pullups. Not to worry, with a little bit of more hard work you will get there. Just repeat this past week, and retry the test.</string>
+
+    // End test activity
+    <string name="end_test_main_text_placedholder">You\'ve completed x weeks of the plan, congratulations! Now it\'s time to test your maximum.</string>
+    <string name="end_test_main_text">You\'ve completed %s weeks of the plan, congratulations! Now it\'s time to test your maximum.</string>
+    <string name="end_test_rest">Take two days off, get plenty of rest, eat and drink right. Now you should be able to do 20 pullups!</string>
+    <string name="congratulation_final_text_placeholder">You did a great job these past X weeks! Unfortunately you haven\'t been able to do 20 pullups just yet. Not to worry! Let\'s just repeat the past week and try again.</string>
+    <string name="congratulation_final_text">You did a great job these past %s weeks! Unfortunately you haven\'t been able to do 20 pullups just yet. Not to worry! Let\'s just repeat the past week and try again.</string>
+    <string name="good_job_final_test_text_placeholder">You did a good job these past X weeks but by now you should have been able to be closer to 20 pullups. Not to worry, with a little bit of more hard work you will get there. Just repeat this past two weeks, and retry the test.</string>
+    <string name="good_job_final_test_text">You did a good job these past %s weeks but by now you should have been able to be closer to 20 pullups. Not to worry, with a little bit of more hard work you will get there. Just repeat this past two weeks, and retry the test.</string>
+
+    // Challenge completed activity
+    <string name="challenge_complete_image_descript">Challenge complete image descript</string>
+    <string name="congratulations_final">Congratulations</string>
+    <string name="finished_challenged">You have finished the 20 Pullups Challenge!</string>
+    <string name="challenge_finished_long">Your improvement during the program was noticeable and you\'ve achieved the ultimate goal. Now it\'s time to set your eyes on the next challenge. Are you up to the 100 pullups challenge?</string>
+
 </resources>

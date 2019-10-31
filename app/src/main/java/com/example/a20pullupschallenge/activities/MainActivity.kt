@@ -1,9 +1,9 @@
 package com.example.a20pullupschallenge.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Context
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a20pullupschallenge.R
@@ -44,7 +44,14 @@ class MainActivity : AppCompatActivity() {
             createWorkoutLayout.visibility = View.GONE
             workoutPlanLayout.visibility = View.VISIBLE
 
-            viewPlan()
+            val nextWeekAndDay = nextWeekAndDay()
+            if(nextWeekAndDay[0] == 4 && nextWeekAndDay[1] == 1) {
+                startWorkoutBtn.text = "Take test"
+                viewPlan()
+            } else {
+                viewPlan()
+            }
+
         }
     }
 
@@ -101,10 +108,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startWorkoutBtnClicked(view:View) {
-        val weekAndDay = planDatabase.getNextWorkoutWeekAndDay()
+        val weekAndDay = nextWeekAndDay()
         val nextWeek = weekAndDay[0]
         val nextDay = weekAndDay[1]
-        startActivity<WorkoutActivity>("week" to nextWeek, "day" to nextDay)
+
+        if(nextWeek == 4 && nextDay == 1) {
+            startActivity<MidTestActivity>("week" to nextWeek, "day" to nextDay)
+        } else {
+            startActivity<WorkoutActivity>("week" to nextWeek, "day" to nextDay)
+        }
+
+    }
+
+    fun nextWeekAndDay() : ArrayList<Int> {
+        return planDatabase.getNextWorkoutWeekAndDay()
     }
 
     private fun viewPlan() {
@@ -116,6 +133,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun testBtnClicked(view : View) {
-        startActivity<MidTestActivity>("week" to 3)
+        startActivity<EndTestActivity>("week" to 6)
     }
 }

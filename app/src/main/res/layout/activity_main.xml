@@ -136,118 +136,115 @@
 
         <TextView
             android:id="@+id/titleText"
-            android:layout_width="250dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/your_personalized_training_plan"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
+            android:textSize="28sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TableRow
-            android:id="@+id/tableRow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:gravity="center"
-            android:weightSum="7"
-            app:layout_constraintBottom_toTopOf="@+id/rvList"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/blue_border"
+            android:orientation="vertical"
+            android:padding="6dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleText">
 
-            <TextView
-                android:id="@+id/dayText"
-                android:layout_width="0dp"
+            <TableRow
+                android:id="@+id/tableRow"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Week"
-                android:textAlignment="center"
-                android:textColor="@color/colorTextPrimary" />
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:weightSum="6">
 
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Day"
-                android:textAlignment="center"
-                android:textColor="@color/colorTextPrimary" />
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Day"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextPrimary" />
 
-            <TextView
-                android:id="@+id/setOne"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="@string/set_1"
-                android:textAlignment="center"
-                android:textColor="@color/colorTextWhite" />
+                <TextView
+                    android:id="@+id/setOne"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/set_1"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextWhite" />
 
-            <TextView
-                android:id="@+id/setTwo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="@string/set_2"
-                android:textAlignment="center"
-                android:textColor="@color/colorTextWhite" />
+                <TextView
+                    android:id="@+id/setTwo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/set_2"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextWhite" />
 
-            <TextView
-                android:id="@+id/setThree"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="@string/set_3"
-                android:textAlignment="center"
-                android:textColor="@color/colorTextWhite" />
+                <TextView
+                    android:id="@+id/setThree"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/set_3"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextWhite" />
 
-            <TextView
-                android:id="@+id/setFour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="@string/set_4"
-                android:textAlignment="center"
-                android:textColor="@color/colorTextWhite" />
+                <TextView
+                    android:id="@+id/setFour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/set_4"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextWhite" />
 
-            <TextView
-                android:id="@+id/setFive"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="@string/set_5"
-                android:textAlignment="center"
-                android:textColor="@color/colorTextWhite" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/setFive"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/set_5"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextWhite" />
+            </TableRow>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvList"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tableRow" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout2"

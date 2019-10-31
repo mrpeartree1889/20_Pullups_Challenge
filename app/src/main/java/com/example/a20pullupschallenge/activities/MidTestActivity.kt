@@ -38,9 +38,10 @@ class MidTestActivity : AppCompatActivity() {
             imageView4.setImageResource(R.drawable.test_arm)
 
             when(numberPicked) {
-                in 3..8 -> {
+                in 2..9 -> {
                     testTitle.text = getString(R.string.good_job_test)
                     completionText.text = getString(R.string.good_job_test_text)
+                    planDatabase.restartWeeks(currentWeek, 1)
                 }
 
                 in 9..21 -> {
@@ -51,7 +52,7 @@ class MidTestActivity : AppCompatActivity() {
             }
 
             goToPlan.setOnClickListener {
-                startActivity<MainActivity>("initialPullups" to numberPicked)
+                startActivity<MainActivity>()
             }
         }
     }
