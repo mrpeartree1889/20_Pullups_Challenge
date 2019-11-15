@@ -8,8 +8,11 @@ import android.transition.Scene
 import android.transition.TransitionManager
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.a20pullupschallenge.DayWorkout
 import com.example.a20pullupschallenge.R
 import com.example.a20pullupschallenge.databases.MyDatabaseOpenHelper
@@ -115,7 +118,15 @@ class WorkoutActivity : AppCompatActivity() {
                         activeScene = "complete"
 
                     } else {
+                        //Todo cleanup this animation part
+                        val layoutSet : ConstraintLayout = findViewById(R.id.loWorkoutSet)
+                        val slideOutLeft : Animation = AnimationUtils.loadAnimation(this, R.anim.slide_out_left)
+                        val slideInRight : Animation = AnimationUtils.loadAnimation(this, R.anim.slide_in_right)
+                        layoutSet.startAnimation(slideOutLeft)
                         TransitionManager.go(restScene)
+                        val layoutRest : ConstraintLayout = findViewById(R.id.loWorkoutRest)
+                        layoutRest.startAnimation(slideInRight)
+
 
                         // change text on button, on set number and populate table
                         mainBtn.text = getString(R.string.skip_rest)
@@ -126,7 +137,7 @@ class WorkoutActivity : AppCompatActivity() {
                         activeScene = "rest"
 
                         /// Timer for resting
-                        val progressBar: ProgressBar = findViewById(R.id.cdprogressBar)
+                        val progressBar: ProgressBar = findViewById(R.id.progressBar)
                         val timeText: TextView = findViewById(R.id.timeText)
                         val countDownTimer: CountDownTimer
                         var i = 0
