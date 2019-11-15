@@ -126,7 +126,7 @@ class WorkoutActivity : AppCompatActivity() {
                         activeScene = "rest"
 
                         /// Timer for resting
-                        val progressBar: ProgressBar = findViewById(R.id.progressBar)
+                        val progressBar: ProgressBar = findViewById(R.id.cdprogressBar)
                         val timeText: TextView = findViewById(R.id.timeText)
                         val countDownTimer: CountDownTimer
                         var i = 0
